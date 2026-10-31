@@ -32,7 +32,6 @@
         color: #0c235a;
         line-height: 1.25;
         margin-bottom: 16px;
-        font-family:  sans-serif !important;
     }
     .hero-title span {
         color: #3474f5;

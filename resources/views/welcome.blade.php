@@ -1,10 +1,10 @@
 <x-koru-layout>
     <x-slot:title>KORU - Chăm sóc sức khỏe gia đình</x-slot:title>
 
-    @include('partials._banner')
-    @include('partials._why')
-    @include('partials._feature')
-    @include('partials._step')
-    @include('partials._faq')
-    @include('partials._cta')
+    @include('landing._banner')
+    @include('landing._why')
+    @include('landing._feature')
+    @include('landing._step')
+    @include('landing._faq')
+    @include('landing._cta')
 </x-koru-layout>

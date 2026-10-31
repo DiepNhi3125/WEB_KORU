@@ -53,7 +53,6 @@
         <div class="container header-inner">
             <a href="{{ url('/') }}" class="brand">KORU</a>
             <nav class="main-nav">
-                <a href="{{ url('/#home') }}">Trang chủ</a>
                 <a href="{{ url('/#why') }}">Vì sao chọn KORU</a>
                 <a href="{{ url('/#features') }}">Tính năng</a>
                 <a href="{{ url('/#steps') }}">Hướng dẫn</a>

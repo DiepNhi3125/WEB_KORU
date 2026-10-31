@@ -1,25 +1,34 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+    <x-slot:title>Quên mật khẩu - KORU</x-slot:title>
+
+    <div class="auth-heading">
+        <h1>Quên mật khẩu?</h1>
+        <p>Nhập email tài khoản của bạn. Chúng tôi sẽ gửi liên kết thiết lập lại mật khẩu.</p>
     </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    @if (session('status'))
+        <div style="padding: 12px; background: #dcfce7; border: 1px solid #bbf7d0; color: #15803d; border-radius: 10px; font-size: 13px; margin-bottom: 16px;">
+            {{ session('status') }}
+        </div>
+    @endif
 
-    <form method="POST" action="{{ route('password.email') }}">
+    <form method="POST" action="{{ route('password.email') }}" class="auth-form">
         @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="auth-field">
+            <label for="email">Địa chỉ Email</label>
+            <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus placeholder="example@koru.vn">
+            @error('email')
+                <span style="color: #e11d48; font-size: 12px;">{{ $message }}</span>
+            @enderror
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
+        <button type="submit" class="btn-primary auth-submit">
+            Gửi liên kết khôi phục →
+        </button>
     </form>
+
+    <div class="auth-switch">
+        Quay lại <a href="{{ route('login') }}">Đăng nhập</a>
+    </div>
 </x-guest-layout>
