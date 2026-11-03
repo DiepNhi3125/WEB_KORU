@@ -3,25 +3,31 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
 
 class VerifyEmailController extends Controller
 {
     /**
-     * Mark the authenticated user's email address as verified.
+     * Xác thực email và kích hoạt tài khoản.
      */
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
-        if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+        $user = $request->user();
+
+        // Xác thực email bằng chức năng có sẵn của Laravel
+        if (! $user->hasVerifiedEmail()) {
+            $request->fulfill();
         }
 
-        if ($request->user()->markEmailAsVerified()) {
-            event(new Verified($request->user()));
+        // Chỉ kích hoạt tài khoản đang chờ xác thực
+        if ($user->hasVerifiedEmail() && $user->account_status === 'pending') {
+            $user->account_status = 'active';
+            $user->save();
         }
 
-        return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+        return redirect()->intended(
+            route('dashboard', absolute: false).'?verified=1'
+        );
     }
 }

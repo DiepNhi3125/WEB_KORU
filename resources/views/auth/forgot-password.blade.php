@@ -17,7 +17,7 @@
 
         <div class="auth-field">
             <label for="email">Địa chỉ Email</label>
-            <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus placeholder="example@koru.vn">
+            <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus placeholder="nguyenvana@gmail.com">
             @error('email')
                 <span style="color: #e11d48; font-size: 12px;">{{ $message }}</span>
             @enderror

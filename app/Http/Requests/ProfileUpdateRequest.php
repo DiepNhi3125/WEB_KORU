@@ -29,4 +29,15 @@ class ProfileUpdateRequest extends FormRequest
             'phone' => ['required', 'string', 'max:15'],
         ];
     }
+    public function messages(): array
+{
+    return [
+        'name.required' => 'Vui lòng nhập họ và tên.',
+        'email.required' => 'Địa chỉ email không được để trống.',
+        'email.email' => 'Địa chỉ email không đúng định dạng.',
+        'email.unique' => 'Email này đã được sử dụng bởi tài khoản khác.',
+        'phone.required' => 'Vui lòng nhập số điện thoại.',
+        'phone.min' => 'Số điện thoại chưa hợp lệ.',
+    ];
+}
 }

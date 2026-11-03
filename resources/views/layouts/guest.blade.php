@@ -156,16 +156,158 @@
             color: var(--muted);
             font-size: 13px;
         }
+        .auth-logo {
+    display: block;
+    width: 230px;
+    max-width: 100%;
+    height: auto;
+}       /* Thông báo xác thực email thành công */
+.auth-success {
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 10px;
+    color: #047857;
+    font-size: 13px;
+    text-align: center;
+}
+
+/* Hướng dẫn xác thực email */
+.auth-help {
+    margin-bottom: 22px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+/* Khu vực đăng xuất */
+.auth-logout {
+    margin-top: 18px;
+    text-align: center;
+}
+
+/* Nút đăng xuất */
+.auth-logout-btn {
+    border: none;
+    background: transparent;
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.auth-logout-btn:hover {
+    text-decoration: underline;
+}
+
+/* KORU - Trang xác thực Email */
+.verify-page {
+    text-align: center;
+}
+
+.verify-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: #edf4ff;
+    color: #3474f5;
+}
+
+.verify-page .auth-heading {
+    margin-bottom: 20px;
+}
+
+.verify-page .auth-heading h1 {
+    font-size: 24px;
+    letter-spacing: -0.6px;
+    color: #0c235a;
+}
+
+.verify-email-address {
+    padding: 13px 16px;
+    border-radius: 10px;
+    background: #f4f7fc;
+    border: 1px solid #cbd5e1;
+    color: #0c235a;
+    font-size: 14px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.verify-description {
+    margin: 18px 0 20px;
+    color: #5b7098;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.verify-success {
+    margin-bottom: 18px;
+    padding: 12px 14px;
+    border: 1px solid #a7e6c4;
+    border-radius: 10px;
+    background: #effaf3;
+    color: #146c43;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.verify-page .auth-submit {
+    min-height: 46px;
+    margin-top: 0;
+    transition: background 0.2s ease;
+}
+
+.verify-page .auth-submit:hover {
+    background: #1d5bd8;
+}
+
+.verify-help {
+    margin-top: 15px;
+    color: #5b7098;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.verify-footer {
+    border-top: 1px solid #cbd5e1;
+    margin-top: 24px;
+    padding-top: 20px;
+}
+
+.verify-logout {
+    background: none;
+    border: 0;
+    color: #3474f5;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.verify-logout:hover {
+    text-decoration: underline;
+}
+
     </style>
 </head>
 <body>
 
     <div class="auth-wrapper">
-        <a href="{{ url('/') }}" class="auth-brand">KORU</a>
-        <div class="auth-card">
-            {{ $slot }}
-        </div>
-    </div>
+    <a href="{{ url('/') }}" class="auth-brand" aria-label="KORU - Trang chủ">
+        <x-application-logo class="auth-logo" />
+    </a>
 
+    <div class="auth-card">
+        {{ $slot }}
+    </div>
+</div>
 </body>
 </html>

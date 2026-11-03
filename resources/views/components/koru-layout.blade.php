@@ -25,7 +25,18 @@
         /* Header */
         .site-header { background: #fff; border-bottom: 1px solid #f0f3fa; padding: 12px 0; }
         .header-inner { display: flex; align-items: center; justify-content: space-between; }
-        .brand { color: var(--primary); font-size: 24px; font-weight: 800; }
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            display: block;
+            height: 54px;
+            width: auto;
+            max-width: 100%;
+        }
         .main-nav { display: flex; gap: 24px; }
         .main-nav a { color: var(--navy); font-weight: 600; font-size: 14px; }
         
@@ -51,7 +62,9 @@
     <!-- Header dùng chung -->
     <header class="site-header">
         <div class="container header-inner">
-            <a href="{{ url('/') }}" class="brand">KORU</a>
+            <a href="{{ url('/') }}" class="brand" aria-label="KORU - Trang chủ">
+                <x-application-logo class="brand-logo" />
+            </a>
             <nav class="main-nav">
                 <a href="{{ url('/#why') }}">Vì sao chọn KORU</a>
                 <a href="{{ url('/#features') }}">Tính năng</a>

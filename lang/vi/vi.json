@@ -1,0 +1,17 @@
+{
+    "Name" : "Họ tên",
+    "Email" : "Email",
+    "Password" : "Mật khẩu",
+    "Confirm Password" : "Xác nhận lại mật khẩu",
+    "The email has already been taken" : "Email đã đăng ký",
+    "Already registered?":"Bạn đã có tài khoản",
+    "Register":"Đăng ký",
+    "Forgot your password?":"Quên mật khẩu?",
+    "Profile":"Hồ sơ cá nhân",
+    "Log in":"Đăng nhập",
+    "Verify Email Address": "Xác thực địa chỉ email",
+    "Resend Verification Email": "Gửi lại email xác thực",
+    "Log Out": "Đăng xuất",
+    "Regards": "Trân trọng",
+    "Hello!": "Xin chào!"
+}
