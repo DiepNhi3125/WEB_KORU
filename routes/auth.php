@@ -57,17 +57,5 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 
-    Route::get('/dashboard', function () {
-    return view('dashboard');
-    })->middleware(['auth', 'verified', 'role:caregiver'])
-    ->name('dashboard');
-
-    Route::middleware(['auth', 'verified', 'role:admin'])
-    ->prefix('admin')
-    ->name('admin.')
-    ->group(function () {
-        Route::get('/dashboard', function () {
-            return 'Trang quản trị KORU';
-        })->name('dashboard');
-    });
+    
 });

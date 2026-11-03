@@ -22,14 +22,22 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
+    
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = $request->user();
+
+        return match ($user->role) {
+            'admin' => redirect()->route('admin.dashboard'),
+            'caregiver' => redirect()->route('dashboard'),
+            default => abort(403, 'Vai trò tài khoản không hợp lệ.'),
+        };
     }
+
 
     /**
      * Destroy an authenticated session.
