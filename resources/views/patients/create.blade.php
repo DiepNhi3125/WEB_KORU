@@ -4,7 +4,7 @@
     </x-slot>
 
     <!-- Nhúng file CSS riêng cho trang tạo người bệnh -->
-    <link rel="stylesheet" href="{{ asset('css/patient.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/patients.css') }}">
 
     <div class="patient-create-page">
         <div class="patient-create-card">
@@ -93,7 +93,7 @@
                         name="phone"
                         class="patient-form-input"
                         value="{{ old('phone') }}"
-                        placeholder="{{ __('Nhập số điện thoại (nếu có)') }}"
+                        placeholder="{{ __('Nhập số điện thoại') }}"
                         maxlength="10"
                     >
                     @error('phone')

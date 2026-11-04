@@ -42,7 +42,7 @@ class PatientController extends Controller
             'birth_date' => ['nullable', 'date', 'before_or_equal:today'],
             'gender' => ['nullable', Rule::in(['male', 'female', 'other'])],
             'phone' => [
-                'nullable',
+                'required',
                 'string',
                 'regex:/^0[0-9]{9}$/',
             ],
