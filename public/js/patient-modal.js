@@ -19,11 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const data = this.dataset;
 
             setText('modalPatientName', data.name);
-            setText('modalPatientId', 'Hồ sơ #' + data.id);
+            setText('modalPatientId', 'Mã hồ sơ #' + data.id);
             setText('modalAvatar', data.name.trim().charAt(0).toUpperCase());
-            setText('modalRole', data.role);
 
-            setText('modalName', data.name);
             setText('modalBirth', data.birth);
             setText('modalGender', genders[data.gender] || 'Chưa cập nhật');
             setText('modalPhone', data.phone);

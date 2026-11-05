@@ -1,12 +1,14 @@
-/* --- 1. TRANG DANH SÁCH (INDEX) --- */
+
+/* ========== DANH SÁCH ========== */
+
 .patients-page {
-    max-width: 1120px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 36px 20px;
-    font-family: 'Be Vietnam Pro', sans-serif;
 }
 
-.patients-header {
+.patients-header,
+.patient-create-header {
     font-size: 21px;
     font-weight: 700;
     color: #0c235a;
@@ -21,29 +23,28 @@
 }
 
 .patients-title {
+    margin: 0 0 7px;
     font-size: 26px;
     font-weight: 700;
     color: #0c235a;
-    margin: 0 0 7px;
 }
 
 .patients-subtitle {
+    margin: 0;
     font-size: 14px;
     color: #64748b;
-    margin: 0;
 }
 
 .patients-add-btn {
     display: inline-block;
     padding: 12px 20px;
-    background: #3474f5;
-    color: white;
     border-radius: 10px;
-    text-decoration: none;
+    background: #3474f5;
+    color: #fff;
     font-size: 14px;
     font-weight: 600;
+    text-decoration: none;
     white-space: nowrap;
-    transition: background 0.2s;
 }
 
 .patients-add-btn:hover {
@@ -51,116 +52,127 @@
 }
 
 .patients-section {
-    margin-bottom: 36px;
+    margin-bottom: 32px;
 }
 
 .patients-section-title {
-    font-size: 18px;
+    margin-bottom: 16px;
+    font-size: 17px;
     font-weight: 700;
     color: #0c235a;
-    margin-bottom: 18px;
 }
 
-.patients-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
+.patients-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .patients-card {
-    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    background: #fff;
     border: 1px solid #e4ebf7;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 4px 16px rgba(12, 35, 90, 0.04);
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(12, 35, 90, 0.03);
 }
 
-.patients-badge {
-    display: inline-block;
-    padding: 6px 11px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 14px;
+.patients-card-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
 }
 
-.patients-badge-owner {
+.patients-card-name {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 650;
+    color: #0c235a;
+    overflow-wrap: anywhere;
+}
+
+.patients-gender {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.patients-gender-male {
     background: #eaf2ff;
     color: #2563eb;
 }
 
-.patients-badge-shared {
-    background: #ecfdf5;
-    color: #059669;
+.patients-gender-female {
+    background: #fce7f3;
+    color: #db2777;
 }
 
-.patients-card-name {
-    font-size: 18px;
-    font-weight: 700;
-    color: #0c235a;
-    margin: 0 0 12px;
-}
-
-.patients-card-info {
-    font-size: 13px;
+.patients-gender-other {
+    background: #f1f5f9;
     color: #64748b;
-    margin: 7px 0;
+}
+
+.patients-detail-link {
+    flex-shrink: 0;
+    padding: 8px 0;
+    border: 0;
+    background: none;
+    color: #3474f5;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.patients-detail-link:hover {
+    text-decoration: underline;
 }
 
 .patients-empty {
-    grid-column: 1 / -1;
-    background: white;
+    padding: 32px 20px;
+    background: #fff;
     border: 1px dashed #cbd5e1;
-    border-radius: 16px;
-    padding: 42px 20px;
+    border-radius: 12px;
     text-align: center;
     color: #64748b;
     font-size: 14px;
 }
 
-.patients-alert {
-    background: #ecfdf5;
-    border: 1px solid #a7f3d0;
-    color: #047857;
-    padding: 12px 16px;
-    border-radius: 10px;
-    font-size: 14px;
-    margin-bottom: 24px;
-}
 
+/* ========== TẠO HỒ SƠ ========== */
 
-/* --- 2. TRANG TẠO MỚI (CREATE) --- */
 .patient-create-page {
     max-width: 680px;
     margin: 0 auto;
     padding: 40px 20px;
-    font-family: 'Be Vietnam Pro', sans-serif;
-}
-
-.patient-create-header {
-    font-size: 21px;
-    font-weight: 700;
-    color: #0c235a;
 }
 
 .patient-create-card {
     padding: 36px;
-    background: #ffffff;
+    background: #fff;
     border: 1px solid #e4ebf7;
     border-radius: 18px;
 }
 
 .patient-create-title {
+    margin: 0 0 8px;
     font-size: 24px;
     font-weight: 700;
     color: #0c235a;
-    margin: 0 0 8px;
 }
 
 .patient-create-description {
+    margin: 0 0 28px;
     font-size: 14px;
     color: #64748b;
-    margin: 0 0 28px;
 }
 
 .patient-form-group {
@@ -175,13 +187,15 @@
     color: #29416f;
 }
 
-.patient-required {
+.patient-required,
+.patient-form-error {
     color: #e11d48;
 }
 
 .patient-form-input {
     width: 100%;
     min-height: 46px;
+    box-sizing: border-box;
     padding: 12px 14px;
     border: 1px solid #dbe4f0;
     border-radius: 10px;
@@ -189,8 +203,6 @@
     color: #0c235a;
     font-size: 14px;
     font-family: inherit;
-    box-sizing: border-box;
-    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .patient-form-input:focus {
@@ -201,7 +213,6 @@
 
 .patient-form-error {
     margin-top: 7px;
-    color: #e11d48;
     font-size: 12px;
 }
 
@@ -220,11 +231,10 @@
     font-family: inherit;
     text-decoration: none;
     cursor: pointer;
-    transition: background 0.2s;
 }
 
 .patient-btn-cancel {
-    background: white;
+    background: #fff;
     border: 1px solid #dbe4f0;
     color: #64748b;
 }
@@ -236,7 +246,7 @@
 .patient-btn-save {
     background: #3474f5;
     border: 1px solid #3474f5;
-    color: white;
+    color: #fff;
 }
 
 .patient-btn-save:hover {
@@ -244,109 +254,41 @@
 }
 
 
-/* --- 3. TRANG CHI TIẾT (SHOW) --- */
-.patient-detail-heading {
-    padding-bottom: 20px;
-    border-bottom: 1px solid #e4ebf7;
-    margin-bottom: 24px;
-}
+/* ========== MODAL CHI TIẾT ========== */
 
-.patient-detail-section-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #0c235a;
-    margin-bottom: 20px;
-}
-
-.patient-detail-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px 20px;
-}
-
-.patient-detail-field {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    min-width: 0;
-}
-
-.patient-detail-field span {
-    font-size: 12px;
-    color: #64748b;
-}
-
-.patient-detail-field strong {
-    color: #0c235a;
-    font-size: 14px;
-    font-weight: 600;
-    overflow-wrap: anywhere;
-}
-
-.patients-detail-link {
-    display: inline-block;
-    margin-top: 18px;
-    color: #3474f5;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.patients-detail-link:hover {
-    text-decoration: underline;
-}
-
-/* Responsive chung cho màn hình nhỏ */
-@media (max-width: 600px) {
-    .patient-create-card {
-        padding: 24px 20px;
-    }
-
-    .patient-form-actions {
-        flex-direction: column;
-    }
-
-    .patient-btn {
-        text-align: center;
-    }
-
-    .patient-detail-grid {
-        grid-template-columns: 1fr;
-    }
-    
-/* Modal chi tiết người bệnh */
 .patient-modal {
-    width: min(560px, calc(100vw - 32px));
+    width: min(540px, calc(100vw - 32px));
+    max-width: calc(100vw - 32px);
     max-height: 85vh;
+    box-sizing: border-box;
     margin: auto;
     padding: 0;
     border: 1px solid #e4ebf7;
-    border-radius: 20px;
+    border-radius: 18px;
     background: #fff;
+    color: #0c235a;
     box-shadow: 0 24px 70px rgba(12, 35, 90, 0.2);
     overflow-y: auto;
-    color: #0c235a;
 }
 
 .patient-modal::backdrop {
     background: rgba(12, 35, 58, 0.5);
-    backdrop-filter: blur(3px);
 }
 
 .patient-modal-header {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 25px 28px;
+    gap: 16px;
+    padding: 26px;
     border-bottom: 1px solid #e4ebf7;
 }
 
 .patient-modal-avatar {
-    width: 52px;
-    height: 52px;
-    flex-shrink: 0;
     display: grid;
     place-items: center;
+    width: 54px;
+    height: 54px;
+    flex-shrink: 0;
     border-radius: 14px;
     background: #eaf2ff;
     color: #2563eb;
@@ -359,24 +301,35 @@
     min-width: 0;
 }
 
+.patient-modal-eyebrow {
+    margin: 0 0 5px;
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
 .patient-modal-identity h2 {
-    font-size: 19px;
+    margin: 0 0 4px;
+    color: #0c235a;
+    font-size: 20px;
     font-weight: 700;
     overflow-wrap: anywhere;
 }
 
-.patient-modal-identity p {
-    margin-top: 5px;
+.patient-modal-identity span {
+    color: #94a3b8;
     font-size: 12px;
-    color: #64748b;
 }
 
 .patient-modal-close {
     align-self: flex-start;
+    padding: 0;
     border: 0;
     background: none;
     color: #94a3b8;
     font-size: 26px;
+    line-height: 1;
     cursor: pointer;
 }
 
@@ -385,21 +338,12 @@
 }
 
 .patient-modal-body {
-    padding: 24px 28px;
-}
-
-.patient-modal-badge {
-    display: inline-block;
-    padding: 6px 12px;
-    background: #eaf2ff;
-    border-radius: 20px;
-    color: #2563eb;
-    font-size: 12px;
-    font-weight: 600;
+    padding: 24px 26px;
 }
 
 .patient-modal-section {
-    margin: 25px 0 20px;
+    margin: 0 0 22px;
+    color: #0c235a;
     font-size: 15px;
     font-weight: 700;
 }
@@ -408,37 +352,44 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 24px;
+    margin: 0;
 }
 
 .patient-modal-field {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
     min-width: 0;
 }
 
-.patient-modal-field span {
+.patient-modal-field dt,
+.patient-modal-caregiver span {
+    display: block;
+    margin-bottom: 7px;
     color: #64748b;
     font-size: 12px;
 }
 
-.patient-modal-field strong {
+.patient-modal-field dd,
+.patient-modal-caregiver strong {
+    display: block;
+    margin: 0;
     color: #0c235a;
     font-size: 14px;
     font-weight: 600;
     overflow-wrap: anywhere;
 }
 
-.patient-modal-full {
-    grid-column: 1 / -1;
+.patient-modal-caregiver {
+    margin-top: 26px;
+    padding: 18px;
+    border: 1px solid #e4ebf7;
+    border-radius: 12px;
+    background: #f8faff;
 }
 
 .patient-modal-footer {
     display: flex;
     justify-content: flex-end;
-    padding: 18px 28px;
+    padding: 18px 26px;
     border-top: 1px solid #e4ebf7;
-    background: #fafcff;
 }
 
 .patient-modal-done {
@@ -456,23 +407,37 @@
     background: #1f5fdd;
 }
 
-.patients-detail-link {
-    display: inline-block;
-    margin-top: 16px;
-    padding: 0;
-    border: 0;
-    background: none;
-    color: #3474f5;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-}
 
-.patients-detail-link:hover {
-    text-decoration: underline;
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 600px) {
+    .patients-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .patient-create-card {
+        padding: 24px 20px;
+    }
+
+    .patient-form-actions {
+        flex-direction: column;
+    }
+
+    .patient-btn {
+        text-align: center;
+    }
 }
 
 @media (max-width: 520px) {
+    .patients-card {
+        padding: 14px;
+    }
+
+    .patients-card-name {
+        font-size: 14px;
+    }
+
     .patient-modal-header,
     .patient-modal-body {
         padding: 20px;
@@ -480,12 +445,10 @@
 
     .patient-modal-grid {
         grid-template-columns: 1fr;
-        gap: 18px;
+        gap: 20px;
     }
 
     .patient-modal-footer {
         padding: 16px 20px;
     }
-}
-
 }

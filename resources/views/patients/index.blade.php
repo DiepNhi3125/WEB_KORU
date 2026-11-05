@@ -3,7 +3,7 @@
         <h2 class="patients-header">{{ __('Hồ sơ người bệnh') }}</h2>
     </x-slot>
 
-    <!-- Nhúng file CSS từ thư mục public/css/patients.css -->
+    <!-- Nhúng file CSS chung -->
     <link rel="stylesheet" href="{{ asset('css/patients.css') }}">
 
     <div class="patients-page">
@@ -19,38 +19,46 @@
             </a>
         </div>
 
-
+        @if (session('status'))
+            <div class="patients-alert">
+                {{ session('status') }}
+            </div>
+        @endif
 
         <!-- Hồ sơ do người dùng sở hữu -->
         <section class="patients-section">
             <h2 class="patients-section-title">
-                {{ __('Hồ sơ của tôi') }} ({{ count($ownedPatients) }})
+                {{ __('Hồ sơ người bệnh') }} ({{ count($ownedPatients) }})
             </h2>
-            <div class="patients-grid">
+            <div class="patients-list">
                 @if (count($ownedPatients) > 0)
                     @foreach ($ownedPatients as $patient)
                         <div class="patients-card">
-                            <span class="patients-badge patients-badge-owner">
-                                {{ __('Người chăm sóc chính') }}
-                            </span>
-                            <h3 class="patients-card-name">
-                                {{ $patient->full_name }}
-                            </h3>
-                            <p class="patients-card-info">
-                                {{ __('Ngày sinh:') }}
-                                {{ !empty($patient->birth_date) ? date('d/m/Y', strtotime($patient->birth_date)) : __('Chưa cập nhật') }}
-                            </p>
-                            <p class="patients-card-info">
-                                {{ __('Số điện thoại:') }}
-                                {{ $patient->phone ? $patient->phone : __('Chưa cập nhật') }}
-                            </p>
-                            <button type="button" class="patients-detail-link" data-patient-modal data-id="{{ $patient->id }}"
+                            <div class="patients-card-heading">
+                                @if ($patient->gender == 'male')
+                                    <span class="patients-gender patients-gender-male" title="{{ __('Nam') }}" aria-label="{{ __('Nam') }}">♂</span>
+                                @elseif ($patient->gender == 'female')
+                                    <span class="patients-gender patients-gender-female" title="{{ __('Nữ') }}" aria-label="{{ __('Nữ') }}">♀</span>
+                                @else
+                                    <span class="patients-gender patients-gender-other" title="{{ __('Giới tính khác hoặc chưa cập nhật') }}">◎</span>
+                                @endif
+
+                                <h3 class="patients-card-name">
+                                    {{ $patient->full_name }}
+                                </h3>
+                            </div>
+
+                            <button type="button"
+                                class="patients-detail-link"
+                                data-patient-modal
+                                data-id="{{ $patient->id }}"
                                 data-name="{{ $patient->full_name }}"
-                                data-birth="{{ $patient->birth_date?->format('d/m/Y') ?? 'Chưa cập nhật' }}"
-                                data-gender="{{ $patient->gender }}" data-phone="{{ $patient->phone ?? 'Chưa cập nhật' }}"
-                                data-owner="{{ $patient->owner_id == Auth::id() ? Auth::user()->name : ($patient->owner?->name ?? 'Chưa cập nhật') }}"
-                                data-role="{{ $patient->owner_id == Auth::id() ? 'Người chăm sóc chính' : 'Được chia sẻ' }}">
-                                Xem chi tiết
+                                data-birth="{{ !empty($patient->birth_date) ? date('d/m/Y', strtotime($patient->birth_date)) : __('Chưa cập nhật') }}"
+                                data-gender="{{ $patient->gender }}"
+                                data-phone="{{ !empty($patient->phone) ? $patient->phone : __('Chưa cập nhật') }}"
+                                data-owner="{{ Auth::user()->name }}"
+                                aria-label="{{ __('Xem chi tiết') }} {{ $patient->full_name }}">
+                                {{ __('Xem chi tiết') }}
                             </button>
                         </div>
                     @endforeach
@@ -67,20 +75,36 @@
             <h2 class="patients-section-title">
                 {{ __('Hồ sơ được chia sẻ') }} ({{ count($sharedPatients) }})
             </h2>
-            <div class="patients-grid">
+            <div class="patients-list">
                 @if (count($sharedPatients) > 0)
                     @foreach ($sharedPatients as $patient)
                         <div class="patients-card">
-                            <span class="patients-badge patients-badge-shared">
-                                {{ __('Được chia sẻ quyền chăm sóc') }}
-                            </span>
-                            <h3 class="patients-card-name">
-                                {{ $patient->full_name }}
-                            </h3>
-                            <p class="patients-card-info">
-                                {{ __('Người chăm sóc chính:') }}
-                                {{ isset($patient->owner) ? $patient->owner->name : __('Chưa xác định') }}
-                            </p>
+                            <div class="patients-card-heading">
+                                @if ($patient->gender == 'male')
+                                    <span class="patients-gender patients-gender-male" title="{{ __('Nam') }}" aria-label="{{ __('Nam') }}">♂</span>
+                                @elseif ($patient->gender == 'female')
+                                    <span class="patients-gender patients-gender-female" title="{{ __('Nữ') }}" aria-label="{{ __('Nữ') }}">♀</span>
+                                @else
+                                    <span class="patients-gender patients-gender-other" title="{{ __('Giới tính khác hoặc chưa cập nhật') }}">◎</span>
+                                @endif
+
+                                <h3 class="patients-card-name">
+                                    {{ $patient->full_name }}
+                                </h3>
+                            </div>
+
+                            <button type="button"
+                                class="patients-detail-link"
+                                data-patient-modal
+                                data-id="{{ $patient->id }}"
+                                data-name="{{ $patient->full_name }}"
+                                data-birth="{{ !empty($patient->birth_date) ? date('d/m/Y', strtotime($patient->birth_date)) : __('Chưa cập nhật') }}"
+                                data-gender="{{ $patient->gender }}"
+                                data-phone="{{ $patient->phone ? '*******' . substr($patient->phone, -3) : 'Chưa cập nhật' }}"
+                                data-owner="{{ isset($patient->owner) ? $patient->owner->name : __('Chưa xác định') }}"
+                                aria-label="{{ __('Xem chi tiết') }} {{ $patient->full_name }}">
+                                {{ __('Xem chi tiết') }}
+                            </button>
                         </div>
                     @endforeach
                 @else
@@ -90,63 +114,49 @@
                 @endif
             </div>
         </section>
-
     </div>
 
-
+    <!-- Modal HTML5 xem chi tiết -->
     <dialog id="patientDetailModal" class="patient-modal" aria-labelledby="modalPatientName">
-
         <div class="patient-modal-header">
-            <div class="patient-modal-avatar" id="modalAvatar">N</div>
-
+            <div class="patient-modal-avatar" id="modalAvatar" aria-hidden="true"></div>
             <div class="patient-modal-identity">
+                <p class="patient-modal-eyebrow">{{ __('CHI TIẾT HỒ SƠ') }}</p>
                 <h2 id="modalPatientName"></h2>
-                <p id="modalPatientId"></p>
+                <span id="modalPatientId"></span>
             </div>
-
-            <button type="button" class="patient-modal-close" id="closePatientModal" aria-label="Đóng">&times;</button>
+            <button type="button" class="patient-modal-close" id="closePatientModal" aria-label="{{ __('Đóng') }}">&times;</button>
         </div>
 
         <div class="patient-modal-body">
-            <span class="patient-modal-badge" id="modalRole"></span>
-
-            <h3 class="patient-modal-section">Thông tin người bệnh</h3>
-
-            <div class="patient-modal-grid">
+            <h3 class="patient-modal-section">{{ __('Thông tin cá nhân') }}</h3>
+            <dl class="patient-modal-grid">
                 <div class="patient-modal-field">
-                    <span>Họ và tên</span>
-                    <strong id="modalName"></strong>
+                    <dt>{{ __('Ngày sinh') }}</dt>
+                    <dd id="modalBirth"></dd>
                 </div>
-
                 <div class="patient-modal-field">
-                    <span>Ngày sinh</span>
-                    <strong id="modalBirth"></strong>
+                    <dt>{{ __('Giới tính') }}</dt>
+                    <dd id="modalGender"></dd>
                 </div>
-
                 <div class="patient-modal-field">
-                    <span>Giới tính</span>
-                    <strong id="modalGender"></strong>
+                    <dt>{{ __('Số điện thoại') }}</dt>
+                    <dd id="modalPhone"></dd>
                 </div>
-
-                <div class="patient-modal-field">
-                    <span>Số điện thoại</span>
-                    <strong id="modalPhone"></strong>
-                </div>
-
-                <div class="patient-modal-field patient-modal-full">
-                    <span>Người chăm sóc chính</span>
-                    <strong id="modalOwner"></strong>
-                </div>
+            </dl>
+            <div class="patient-modal-caregiver">
+                <span>{{ __('Người chăm sóc chính') }}</span>
+                <strong id="modalOwner"></strong>
             </div>
         </div>
 
         <div class="patient-modal-footer">
             <button type="button" class="patient-modal-done" id="donePatientModal">
-                Đóng
+                {{ __('Đóng') }}
             </button>
         </div>
     </dialog>
 
+    <!-- File Javascript điều khiển Modal -->
     <script src="{{ asset('js/patient-modal.js') }}" defer></script>
-
 </x-app-layout>
