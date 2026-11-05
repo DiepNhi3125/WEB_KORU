@@ -55,7 +55,7 @@
                                 data-name="{{ $patient->full_name }}"
                                 data-birth="{{ !empty($patient->birth_date) ? date('d/m/Y', strtotime($patient->birth_date)) : __('Chưa cập nhật') }}"
                                 data-gender="{{ $patient->gender }}"
-                                data-phone="{{ !empty($patient->phone) ? $patient->phone : __('Chưa cập nhật') }}"
+                                data-phone="{{ $patient->phone ? '*******' . substr($patient->phone, -3) : __('Chưa cập nhật') }}"
                                 data-owner="{{ Auth::user()->name }}"
                                 aria-label="{{ __('Xem chi tiết') }} {{ $patient->full_name }}">
                                 {{ __('Xem chi tiết') }}
