@@ -1,4 +1,3 @@
-
 <?php
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
@@ -25,14 +24,17 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
             ->name('profile.destroy');
 
         Route::get('/patients', [PatientController::class, 'index'])
-        ->name('patients.index');
+            ->name('patients.index');
 
         Route::get('/patients/create', [PatientController::class, 'create'])
-        ->name('patients.create');
+            ->name('patients.create');
 
         Route::post('/patients', [PatientController::class, 'store'])
-        ->name('patients.store');
-        });
+            ->name('patients.store');
+
+        Route::get('/patients/{patient}', [PatientController::class, 'detail'])
+            ->name('patients.detail');
+    });
 
 // Admin: tài khoản được cấp sẵn, không qua đăng ký công khai
 Route::middleware(['auth', 'role:admin'])
@@ -44,4 +46,4 @@ Route::middleware(['auth', 'role:admin'])
         })->name('dashboard');
     });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -1,0 +1,68 @@
+
+.koru-toasts {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: grid;
+    gap: 12px;
+    width: min(380px, calc(100vw - 32px));
+    pointer-events: none;
+}
+
+.koru-toast {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    background: white;
+    border: 1px solid #e4ebf7;
+    border-left: 4px solid #3474f5;
+    border-radius: 12px;
+    box-shadow: 0 8px 28px rgba(12, 35, 90, 0.12);
+    font-size: 13px;
+    color: #29416f;
+    pointer-events: auto;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.koru-toast-success {
+    border-left-color: #16a34a;
+}
+
+.koru-toast-error {
+    border-left-color: #dc2626;
+}
+
+.koru-toast-warning {
+    border-left-color: #f59e0b;
+}
+
+.koru-toast-info {
+    border-left-color: #3474f5;
+}
+
+.koru-toast-message {
+    flex: 1;
+    line-height: 1.6;
+}
+
+.koru-toast-close {
+    border: 0;
+    background: transparent;
+    color: #94a3b8;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.koru-toast.is-hiding {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+@media (max-width: 600px) {
+    .koru-toasts {
+        top: 16px;
+        right: 16px;
+    }
+}

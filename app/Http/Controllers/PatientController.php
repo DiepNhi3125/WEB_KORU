@@ -11,17 +11,17 @@ use Illuminate\Validation\Rule;
 
 class PatientController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $user = $request->user();
+        $user = Auth::user();
 
         $ownedPatients = $user->ownedPatients()
-            ->latest()
+            ->orderBy('created_at', 'desc')
             ->get();
 
         $sharedPatients = $user->sharedPatients()
             ->with('owner:id,name')
-            ->orderByDesc('patients.created_at')
+            ->orderBy('patients.created_at', 'desc')
             ->get();
 
         return view('patients.index', compact(
@@ -37,6 +37,8 @@ class PatientController extends Controller
 
     public function store(Request $request, PatientCodeService $codes)
     {
+        $user = Auth::user();
+
         $data = $request->validate([
             'full_name' => ['required', 'string', 'max:255'],
             'birth_date' => ['nullable', 'date', 'before_or_equal:today'],
@@ -48,10 +50,10 @@ class PatientController extends Controller
             ],
         ]);
 
-        DB::transaction(function () use ($data, $codes) {
+        DB::transaction(function () use ($data, $codes, $user) {
             $patient = new Patient();
             $patient->fill($data);
-            $patient->owner_id = Auth::id();
+            $patient->owner_id = $user->id;
 
             $patient->pairing_hash = bin2hex(random_bytes(32));
             $patient->sharing_hash = bin2hex(random_bytes(32));
@@ -73,5 +75,30 @@ class PatientController extends Controller
         return redirect()
             ->route('patients.index')
             ->with('success', 'Đã tạo hồ sơ người bệnh thành công.');
+    }
+
+    public function show(Patient $patient)
+    {
+        $user = Auth::user();
+
+        // Kiểm tra người chăm sóc chính
+        $isOwner = (int) $patient->owner_id === (int) $user->id;
+
+        // Kiểm tra người chăm sóc được chia sẻ
+        $isShared = $patient->caregivers()
+            ->where('users.id', $user->id)
+            ->exists();
+
+        // Không có quyền thì quay về danh sách
+        if (!$isOwner && !$isShared) {
+            return redirect()->route('patients.index');
+        }
+
+        $patient->load('owner');
+
+        return view('patients.show', compact(
+            'patient',
+            'isOwner'
+        ));
     }
 }

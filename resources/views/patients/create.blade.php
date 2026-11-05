@@ -86,20 +86,25 @@
                 <div class="patient-form-group">
                     <label for="phone" class="patient-form-label">
                         {{ __('Số điện thoại') }}
+                        <span class="patient-required">*</span>
                     </label>
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        class="patient-form-input"
-                        value="{{ old('phone') }}"
-                        placeholder="{{ __('Nhập số điện thoại') }}"
-                        maxlength="10"
+
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    class="patient-form-input"
+                    value="{{ old('phone') }}"
+                    placeholder="{{ __('Nhập số điện thoại người bệnh') }}"
+                    maxlength="10"
+                    inputmode="numeric"
+                    required
                     >
-                    @error('phone')
-                        <p class="patient-form-error">{{ $message }}</p>
-                    @enderror
-                </div>
+
+                @error('phone')
+        <p class="patient-form-error">{{ $message }}</p>
+    @enderror
+</div>
 
                 <!-- Các nút -->
                 <div class="patient-form-actions">

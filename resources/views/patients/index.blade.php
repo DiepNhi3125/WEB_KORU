@@ -19,11 +19,7 @@
             </a>
         </div>
 
-        @if (session('success'))
-            <div class="patients-alert">
-                {{ session('success') }}
-            </div>
-        @endif
+
 
         <!-- Hồ sơ do người dùng sở hữu -->
         <section class="patients-section">
@@ -48,6 +44,9 @@
                                 {{ __('Số điện thoại:') }}
                                 {{ $patient->phone ? $patient->phone : __('Chưa cập nhật') }}
                             </p>
+                            <a href="{{ route('patients.detail', $patient->id) }}" class="patients-detail-link">
+                                {{ __('Xem chi tiết') }}
+                            </a>
                         </div>
                     @endforeach
                 @else
@@ -86,5 +85,6 @@
                 @endif
             </div>
         </section>
+
     </div>
 </x-app-layout>

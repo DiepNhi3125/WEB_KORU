@@ -1,4 +1,4 @@
-/* --- 1. CSS DÙNG CHO TRANG DANH SÁCH (INDEX) --- */
+/* --- 1. TRANG DANH SÁCH (INDEX) --- */
 .patients-page {
     max-width: 1120px;
     margin: 0 auto;
@@ -129,7 +129,7 @@
 }
 
 
-/* --- 2. CSS DÙNG CHO TRANG TẠO MỚI (CREATE) --- */
+/* --- 2. TRANG TẠO MỚI (CREATE) --- */
 .patient-create-page {
     max-width: 680px;
     margin: 0 auto;
@@ -243,6 +243,60 @@
     background: #1f5fdd;
 }
 
+
+/* --- 3. TRANG CHI TIẾT (SHOW) --- */
+.patient-detail-heading {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e4ebf7;
+    margin-bottom: 24px;
+}
+
+.patient-detail-section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0c235a;
+    margin-bottom: 20px;
+}
+
+.patient-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 20px;
+}
+
+.patient-detail-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.patient-detail-field span {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.patient-detail-field strong {
+    color: #0c235a;
+    font-size: 14px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.patients-detail-link {
+    display: inline-block;
+    margin-top: 18px;
+    color: #3474f5;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.patients-detail-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive chung cho màn hình nhỏ */
 @media (max-width: 600px) {
     .patient-create-card {
         padding: 24px 20px;
@@ -254,5 +308,9 @@
 
     .patient-btn {
         text-align: center;
+    }
+
+    .patient-detail-grid {
+        grid-template-columns: 1fr;
     }
 }
