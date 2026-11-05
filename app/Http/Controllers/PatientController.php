@@ -81,22 +81,19 @@ class PatientController extends Controller
     {
         $user = Auth::user();
 
-        // Kiểm tra người chăm sóc chính
         $isOwner = (int) $patient->owner_id === (int) $user->id;
 
-        // Kiểm tra người chăm sóc được chia sẻ
         $isShared = $patient->caregivers()
             ->where('users.id', $user->id)
             ->exists();
 
-        // Không có quyền thì quay về danh sách
         if (!$isOwner && !$isShared) {
             return redirect()->route('patients.index');
         }
 
         $patient->load('owner');
 
-        return view('patients.show', compact(
+        return view('patients.detail', compact(
             'patient',
             'isOwner'
         ));

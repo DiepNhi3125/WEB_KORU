@@ -40,11 +40,10 @@
                 <div class="patient-detail-field">
                     <span>{{ __('Ngày sinh') }}</span>
                     <strong>
-                        {{ !empty($patient->birth_date) ? date('d/m/Y', strtotime($patient->birth_date)) : __('Chưa cập nhật') }}
+                        {{ $patient->birth_date?->format('d/m/Y') ?? __('Chưa cập nhật') }}
                     </strong>
                 </div>
 
-                <!-- Giới tính (Thay match() bằng @if @elseif quen thuộc) -->
                 <div class="patient-detail-field">
                     <span>{{ __('Giới tính') }}</span>
                     <strong>

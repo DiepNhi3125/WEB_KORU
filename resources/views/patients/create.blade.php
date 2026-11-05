@@ -23,16 +23,9 @@
                     <label for="full_name" class="patient-form-label">
                         {{ __('Họ và tên') }} <span class="patient-required">*</span>
                     </label>
-                    <input
-                        type="text"
-                        id="full_name"
-                        name="full_name"
-                        class="patient-form-input"
-                        value="{{ old('full_name') }}"
-                        placeholder="{{ __('Nhập họ và tên') }}"
-                        maxlength="255"
-                        required
-                    >
+                    <input type="text" id="full_name" name="full_name" class="patient-form-input"
+                        value="{{ old('full_name') }}" placeholder="{{ __('Nhập họ và tên') }}" maxlength="255"
+                        required>
                     @error('full_name')
                         <p class="patient-form-error">{{ $message }}</p>
                     @enderror
@@ -43,14 +36,8 @@
                     <label for="birth_date" class="patient-form-label">
                         {{ __('Ngày sinh') }}
                     </label>
-                    <input
-                        type="date"
-                        id="birth_date"
-                        name="birth_date"
-                        class="patient-form-input"
-                        value="{{ old('birth_date') }}"
-                        max="{{ date('Y-m-d') }}"
-                    >
+                    <input type="date" id="birth_date" name="birth_date" class="patient-form-input"
+                        value="{{ old('birth_date') }}" max="{{ date('Y-m-d') }}">
                     @error('birth_date')
                         <p class="patient-form-error">{{ $message }}</p>
                     @enderror
@@ -61,11 +48,7 @@
                     <label for="gender" class="patient-form-label">
                         {{ __('Giới tính') }}
                     </label>
-                    <select
-                        id="gender"
-                        name="gender"
-                        class="patient-form-input"
-                    >
+                    <select id="gender" name="gender" class="patient-form-input">
                         <option value="">{{ __('Chọn giới tính') }}</option>
                         <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>
                             {{ __('Nam') }}
@@ -89,22 +72,14 @@
                         <span class="patient-required">*</span>
                     </label>
 
-                <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    class="patient-form-input"
-                    value="{{ old('phone') }}"
-                    placeholder="{{ __('Nhập số điện thoại người bệnh') }}"
-                    maxlength="10"
-                    inputmode="numeric"
-                    required
-                    >
+                    <input type="tel" id="phone" name="phone" class="patient-form-input" value="{{ old('phone') }}"
+                        placeholder="{{ __('Nhập số điện thoại người bệnh') }}" maxlength="10" inputmode="numeric"
+                        required>
 
-                @error('phone')
-        <p class="patient-form-error">{{ $message }}</p>
-    @enderror
-</div>
+                    @error('phone')
+                        <p class="patient-form-error">{{ $message }}</p>
+                    @enderror
+                </div>
 
                 <!-- Các nút -->
                 <div class="patient-form-actions">

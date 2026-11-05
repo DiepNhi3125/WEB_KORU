@@ -32,7 +32,7 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
         Route::post('/patients', [PatientController::class, 'store'])
             ->name('patients.store');
 
-        Route::get('/patients/{patient}', [PatientController::class, 'detail'])
+        Route::get('/patients/{patient}', [PatientController::class, 'show'])
             ->name('patients.detail');
     });
 

@@ -44,9 +44,14 @@
                                 {{ __('Số điện thoại:') }}
                                 {{ $patient->phone ? $patient->phone : __('Chưa cập nhật') }}
                             </p>
-                            <a href="{{ route('patients.detail', $patient->id) }}" class="patients-detail-link">
-                                {{ __('Xem chi tiết') }}
-                            </a>
+                            <button type="button" class="patients-detail-link" data-patient-modal data-id="{{ $patient->id }}"
+                                data-name="{{ $patient->full_name }}"
+                                data-birth="{{ $patient->birth_date?->format('d/m/Y') ?? 'Chưa cập nhật' }}"
+                                data-gender="{{ $patient->gender }}" data-phone="{{ $patient->phone ?? 'Chưa cập nhật' }}"
+                                data-owner="{{ $patient->owner_id == Auth::id() ? Auth::user()->name : ($patient->owner?->name ?? 'Chưa cập nhật') }}"
+                                data-role="{{ $patient->owner_id == Auth::id() ? 'Người chăm sóc chính' : 'Được chia sẻ' }}">
+                                Xem chi tiết
+                            </button>
                         </div>
                     @endforeach
                 @else
@@ -87,4 +92,61 @@
         </section>
 
     </div>
+
+
+    <dialog id="patientDetailModal" class="patient-modal" aria-labelledby="modalPatientName">
+
+        <div class="patient-modal-header">
+            <div class="patient-modal-avatar" id="modalAvatar">N</div>
+
+            <div class="patient-modal-identity">
+                <h2 id="modalPatientName"></h2>
+                <p id="modalPatientId"></p>
+            </div>
+
+            <button type="button" class="patient-modal-close" id="closePatientModal" aria-label="Đóng">&times;</button>
+        </div>
+
+        <div class="patient-modal-body">
+            <span class="patient-modal-badge" id="modalRole"></span>
+
+            <h3 class="patient-modal-section">Thông tin người bệnh</h3>
+
+            <div class="patient-modal-grid">
+                <div class="patient-modal-field">
+                    <span>Họ và tên</span>
+                    <strong id="modalName"></strong>
+                </div>
+
+                <div class="patient-modal-field">
+                    <span>Ngày sinh</span>
+                    <strong id="modalBirth"></strong>
+                </div>
+
+                <div class="patient-modal-field">
+                    <span>Giới tính</span>
+                    <strong id="modalGender"></strong>
+                </div>
+
+                <div class="patient-modal-field">
+                    <span>Số điện thoại</span>
+                    <strong id="modalPhone"></strong>
+                </div>
+
+                <div class="patient-modal-field patient-modal-full">
+                    <span>Người chăm sóc chính</span>
+                    <strong id="modalOwner"></strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="patient-modal-footer">
+            <button type="button" class="patient-modal-done" id="donePatientModal">
+                Đóng
+            </button>
+        </div>
+    </dialog>
+
+    <script src="{{ asset('js/patient-modal.js') }}" defer></script>
+
 </x-app-layout>
