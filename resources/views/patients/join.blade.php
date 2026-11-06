@@ -33,7 +33,7 @@
                            id="code"
                            name="code"
                            class="patient-form-input"
-                           value="{{ old('code') }}"
+                           value="{{ old('code', $code) }}"
                            maxlength="24"
                            autocomplete="off"
                            spellcheck="false"

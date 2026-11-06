@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\SvgWriter;
 use App\Models\Patient;
 use App\Services\PatientCodeService;
 use Illuminate\Http\Request;

@@ -588,4 +588,23 @@
     display: none;
 }
 
+/* QR chia sẻ hồ sơ */
+.patient-share-qr {
+    margin-top: 24px;
+    padding: 24px;
+    border: 1px solid #e4ebf7;
+    border-radius: 12px;
+    background: #f8fafc;
+    text-align: center;
+}
+
+.patient-share-qr img {
+    display: block;
+    width: 260px;
+    max-width: 100%;
+    height: auto;
+    margin: 16px auto;
+    background: #fff;
+}
+
 
