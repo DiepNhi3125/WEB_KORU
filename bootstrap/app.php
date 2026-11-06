@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\CheckRole;
 use App\Http\Middleware\EnsurePatientOwner;
+use App\Http\Middleware\EnsurePatientAccess;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -17,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
     $middleware->alias([
         'role' => CheckRole::class,
         'patient.owner' => EnsurePatientOwner::class,
+        'patient.access' => EnsurePatientAccess::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

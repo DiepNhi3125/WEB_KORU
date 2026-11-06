@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\PatientPairingController;
 use App\Http\Controllers\PatientSharingController;
+use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,12 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
         Route::get('/patients/{patient}', [PatientController::class, 'show'])
             ->name('patients.detail');
 
+        // Chủ hồ sơ và người được chia sẻ có thể xem lịch
+        Route::get('/patients/{patient}/reminders', [ReminderController::class, 'index'])
+            ->middleware('patient.access')
+            ->name('reminders.index');
+            
+
         // Chỉ người chăm sóc chính được chỉnh sửa
         Route::middleware('patient.owner')->group(function () {
 
@@ -69,7 +76,10 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
             Route::get('/patients/{patient}/pair', [PatientPairingController::class, 'show'])
                 ->name('patients.pair');
 
-
+            Route::get('/patients/{patient}/reminders/create', [ReminderController::class, 'create'])
+                ->name('reminders.create');
+            Route::post('/patients/{patient}/reminders', [ReminderController::class, 'store'])
+                ->name('reminders.store');
         });
     });
 
