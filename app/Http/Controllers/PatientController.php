@@ -119,4 +119,15 @@ class PatientController extends Controller
             ->with('success', 'Đã cập nhật hồ sơ người bệnh thành công.');
     }
 
+
+    public function destroy(Patient $patient)
+    {
+        $patient->delete();
+
+        return redirect()
+            ->route('patients.index')
+            ->with('success', 'Đã gỡ hồ sơ người bệnh thành công.');
+    }
+
+
 }

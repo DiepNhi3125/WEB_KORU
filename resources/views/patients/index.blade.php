@@ -19,7 +19,7 @@
             </a>
         </div>
 
-      
+
 
         <!-- Hồ sơ do người dùng sở hữu -->
         <section class="patients-section">
@@ -53,6 +53,7 @@
                                 data-gender="{{ $patient->gender }}"
                                 data-phone="{{ $patient->phone ? '*******' . substr($patient->phone, -3) : __('Chưa cập nhật') }}"
                                 data-owner="{{ Auth::user()->name }}" data-edit-url="{{ route('patients.edit', $patient) }}"
+                                data-delete-url="{{ route('patients.destroy', $patient) }}"
                                 aria-label="{{ __('Xem chi tiết') }} {{ $patient->full_name }}">
                                 {{ __('Xem chi tiết') }}
                             </button>
@@ -147,15 +148,60 @@
             </div>
         </div>
 
+
         <div class="patient-modal-footer">
+            <button type="button" id="deletePatientButton" class="patient-modal-delete" hidden>
+                Gỡ hồ sơ
+            </button>
+
             <a id="editPatientLink" class="patient-btn patient-btn-save" hidden>
                 {{ __('Chỉnh sửa') }}
             </a>
+
             <button type="button" class="patient-modal-done" id="donePatientModal">
                 {{ __('Đóng') }}
             </button>
         </div>
+
     </dialog>
+    
+<!-- Modal xác nhận gỡ hồ sơ -->
+<dialog id="patientDeleteModal"
+        class="patient-delete-modal"
+        aria-labelledby="patientDeleteTitle">
+
+    <h2 id="patientDeleteTitle" class="patient-delete-title">
+        Xác nhận gỡ hồ sơ
+    </h2>
+
+    <p class="patient-delete-description">
+        Bạn có chắc muốn gỡ hồ sơ
+        <strong id="deletePatientName"></strong>?
+    </p>
+
+    <p class="patient-delete-warning">
+        Thao tác này sẽ xóa vĩnh viễn hồ sơ, lịch nhắc thuốc,
+        lịch sử uống thuốc và các liên kết liên quan.
+        Dữ liệu đã xóa không thể khôi phục qua ứng dụng.
+    </p>
+
+    <form id="patientDeleteForm" method="POST">
+        @csrf
+        @method('DELETE')
+
+        <div class="patient-delete-actions">
+            <button type="button"
+                    id="cancelDeletePatient"
+                    class="patient-delete-cancel">
+                Hủy
+            </button>
+
+            <button type="submit" class="patient-delete-confirm">
+                Xóa vĩnh viễn
+            </button>
+        </div>
+    </form>
+</dialog>
 
     <!-- File Javascript điều khiển Modal -->
     <script src="{{ asset('js/patient-modal.js') }}" defer></script>

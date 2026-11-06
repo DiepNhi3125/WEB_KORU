@@ -1,4 +1,3 @@
-
 <?php
 
 use App\Http\Controllers\PatientController;
@@ -47,6 +46,11 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
 
             Route::patch('/patients/{patient}', [PatientController::class, 'update'])
                 ->name('patients.update');
+
+
+            Route::delete('/patients/{patient}', [PatientController::class, 'destroy'])
+                ->name('patients.destroy');
+
 
         });
     });
