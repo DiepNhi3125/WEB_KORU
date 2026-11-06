@@ -84,8 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('closePatientModal')
         .addEventListener('click', () => modal.close());
 
-    document.getElementById('donePatientModal')
-        .addEventListener('click', () => modal.close());
+
 
     // Mở Modal xác nhận gỡ hồ sơ
     if (deleteButton && deleteForm) {
