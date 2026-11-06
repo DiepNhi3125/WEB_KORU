@@ -14,15 +14,32 @@ class PatientSharingController extends Controller
     // Chủ hồ sơ xem mã chia sẻ
     public function show(Patient $patient, PatientCodeService $codes)
     {
+        // Lấy mã chia sẻ cố định
         $code = $codes->generate($patient, 'sharing');
 
-        return view('patients.share', compact('patient', 'code'));
+        // Tạo đường dẫn liên kết hồ sơ
+        $joinUrl = route('patients.join', ['code' => $code]);
+
+        // Tạo mã QR
+        $writer = new SvgWriter();
+
+        $qrCode = $writer->write(
+            new QrCode(
+                data: $joinUrl,
+                size: 260,
+                margin: 10
+            )
+        )->getDataUri();
+
+        return view('patients.share', compact('patient', 'code', 'qrCode'));
     }
 
-    // Trang nhập mã của người chăm sóc phụ
-    public function create()
+    public function create(Request $request)
     {
-        return view('patients.join');
+        // Lấy mã chia sẻ từ URL
+        $code = strtoupper(trim((string) $request->query('code', '')));
+
+        return view('patients.join', compact('code'));
     }
 
     // Liên kết với hồ sơ bằng mã chia sẻ
