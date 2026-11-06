@@ -390,6 +390,7 @@
     justify-content: flex-end;
     padding: 18px 26px;
     border-top: 1px solid #e4ebf7;
+    gap: 12px;
 }
 
 .patient-modal-done {
@@ -451,4 +452,7 @@
     .patient-modal-footer {
         padding: 16px 20px;
     }
+    #editPatientLink[hidden] {
+    display: none;
+}
 }

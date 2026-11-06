@@ -36,11 +36,14 @@
                         <div class="patients-card">
                             <div class="patients-card-heading">
                                 @if ($patient->gender == 'male')
-                                    <span class="patients-gender patients-gender-male" title="{{ __('Nam') }}" aria-label="{{ __('Nam') }}">♂</span>
+                                    <span class="patients-gender patients-gender-male" title="{{ __('Nam') }}"
+                                        aria-label="{{ __('Nam') }}">♂</span>
                                 @elseif ($patient->gender == 'female')
-                                    <span class="patients-gender patients-gender-female" title="{{ __('Nữ') }}" aria-label="{{ __('Nữ') }}">♀</span>
+                                    <span class="patients-gender patients-gender-female" title="{{ __('Nữ') }}"
+                                        aria-label="{{ __('Nữ') }}">♀</span>
                                 @else
-                                    <span class="patients-gender patients-gender-other" title="{{ __('Giới tính khác hoặc chưa cập nhật') }}">◎</span>
+                                    <span class="patients-gender patients-gender-other"
+                                        title="{{ __('Giới tính khác hoặc chưa cập nhật') }}">◎</span>
                                 @endif
 
                                 <h3 class="patients-card-name">
@@ -48,15 +51,12 @@
                                 </h3>
                             </div>
 
-                            <button type="button"
-                                class="patients-detail-link"
-                                data-patient-modal
-                                data-id="{{ $patient->id }}"
+                            <button type="button" class="patients-detail-link" data-patient-modal data-id="{{ $patient->id }}"
                                 data-name="{{ $patient->full_name }}"
                                 data-birth="{{ !empty($patient->birth_date) ? date('d/m/Y', strtotime($patient->birth_date)) : __('Chưa cập nhật') }}"
                                 data-gender="{{ $patient->gender }}"
                                 data-phone="{{ $patient->phone ? '*******' . substr($patient->phone, -3) : __('Chưa cập nhật') }}"
-                                data-owner="{{ Auth::user()->name }}"
+                                data-owner="{{ Auth::user()->name }}" data-edit-url="{{ route('patients.edit', $patient) }}"
                                 aria-label="{{ __('Xem chi tiết') }} {{ $patient->full_name }}">
                                 {{ __('Xem chi tiết') }}
                             </button>
@@ -81,11 +81,14 @@
                         <div class="patients-card">
                             <div class="patients-card-heading">
                                 @if ($patient->gender == 'male')
-                                    <span class="patients-gender patients-gender-male" title="{{ __('Nam') }}" aria-label="{{ __('Nam') }}">♂</span>
+                                    <span class="patients-gender patients-gender-male" title="{{ __('Nam') }}"
+                                        aria-label="{{ __('Nam') }}">♂</span>
                                 @elseif ($patient->gender == 'female')
-                                    <span class="patients-gender patients-gender-female" title="{{ __('Nữ') }}" aria-label="{{ __('Nữ') }}">♀</span>
+                                    <span class="patients-gender patients-gender-female" title="{{ __('Nữ') }}"
+                                        aria-label="{{ __('Nữ') }}">♀</span>
                                 @else
-                                    <span class="patients-gender patients-gender-other" title="{{ __('Giới tính khác hoặc chưa cập nhật') }}">◎</span>
+                                    <span class="patients-gender patients-gender-other"
+                                        title="{{ __('Giới tính khác hoặc chưa cập nhật') }}">◎</span>
                                 @endif
 
                                 <h3 class="patients-card-name">
@@ -93,10 +96,7 @@
                                 </h3>
                             </div>
 
-                            <button type="button"
-                                class="patients-detail-link"
-                                data-patient-modal
-                                data-id="{{ $patient->id }}"
+                            <button type="button" class="patients-detail-link" data-patient-modal data-id="{{ $patient->id }}"
                                 data-name="{{ $patient->full_name }}"
                                 data-birth="{{ !empty($patient->birth_date) ? date('d/m/Y', strtotime($patient->birth_date)) : __('Chưa cập nhật') }}"
                                 data-gender="{{ $patient->gender }}"
@@ -125,7 +125,8 @@
                 <h2 id="modalPatientName"></h2>
                 <span id="modalPatientId"></span>
             </div>
-            <button type="button" class="patient-modal-close" id="closePatientModal" aria-label="{{ __('Đóng') }}">&times;</button>
+            <button type="button" class="patient-modal-close" id="closePatientModal"
+                aria-label="{{ __('Đóng') }}">&times;</button>
         </div>
 
         <div class="patient-modal-body">
