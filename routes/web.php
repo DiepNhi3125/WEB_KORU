@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\PatientPairingController;
 use App\Http\Controllers\PatientSharingController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/device/pair', [PatientPairingController::class, 'scan'])
+    ->name('device.pair');
 
 // Người chăm sóc: bắt buộc xác thực email
 Route::middleware(['auth', 'verified', 'role:caregiver'])
@@ -61,6 +64,12 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
             Route::get('/patients/{patient}/share', [PatientSharingController::class, 'show'])
                 ->name('patients.share');
 
+
+            // Người chăm sóc chính tạo QR ghép thiết bị
+            Route::get('/patients/{patient}/pair', [PatientPairingController::class, 'show'])
+                ->name('patients.pair');
+
+
         });
     });
 
@@ -75,5 +84,7 @@ Route::middleware(['auth', 'role:admin'])
         })->name('dashboard');
 
     });
+
+
 
 require __DIR__ . '/auth.php';

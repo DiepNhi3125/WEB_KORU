@@ -63,6 +63,7 @@
                                 data-owner="{{ Auth::user()->name }}" data-edit-url="{{ route('patients.edit', $patient) }}"
                                 data-delete-url="{{ route('patients.destroy', $patient) }}"
                                 data-share-url="{{ route('patients.share', $patient) }}"
+                                data-pair-url="{{ route('patients.pair', $patient) }}"
                                 aria-label="{{ __('Xem chi tiết') }} {{ $patient->full_name }}">
                                 {{ __('Xem chi tiết') }}
                             </button>
@@ -162,6 +163,10 @@
             <button type="button" id="deletePatientButton" class="patient-modal-delete" hidden>
                 Gỡ hồ sơ
             </button>
+
+            <a id="pairPatientLink" class="patient-btn patient-btn-cancel" hidden>
+                {{ __('Ghép thiết bị') }}
+            </a>
 
             <a id="sharePatientLink" class="patient-btn patient-btn-cancel" hidden>
                 {{ __('Chia sẻ') }}

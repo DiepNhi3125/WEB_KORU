@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!modal || !deleteModal) return;
 
     const editLink = document.getElementById('editPatientLink');
+    const pairLink = document.getElementById('pairPatientLink');
     const shareLink = document.getElementById('sharePatientLink');
     const deleteButton = document.getElementById('deletePatientButton');
     const deleteForm = document.getElementById('patientDeleteForm');
@@ -20,10 +21,12 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById(id).textContent = value;
     }
 
+    // Mở Modal xem chi tiết hồ sơ
     document.querySelectorAll('[data-patient-modal]').forEach(button => {
         button.addEventListener('click', function () {
             const data = this.dataset;
 
+            // Hiển thị thông tin người bệnh
             setText('modalPatientName', data.name);
             setText('modalPatientId', 'Mã hồ sơ #' + data.id);
             setText('modalAvatar', data.name.trim().charAt(0).toUpperCase());
@@ -33,29 +36,45 @@ document.addEventListener('DOMContentLoaded', function () {
             setText('modalPhone', data.phone);
             setText('modalOwner', data.owner);
 
-            editLink.hidden = !data.editUrl;
+            // Nút chỉnh sửa
+            if (editLink) {
+                editLink.hidden = !data.editUrl;
 
-            if (data.editUrl) {
-                editLink.href = data.editUrl;
-            } else {
-                editLink.removeAttribute('href');
+                if (data.editUrl) {
+                    editLink.href = data.editUrl;
+                } else {
+                    editLink.removeAttribute('href');
+                }
             }
 
-            deleteButton.hidden = !data.deleteUrl;
-            deleteButton.dataset.url = data.deleteUrl || '';
-            deleteButton.dataset.name = data.name;
+            // Nút gỡ hồ sơ
+            if (deleteButton) {
+                deleteButton.hidden = !data.deleteUrl;
+                deleteButton.dataset.url = data.deleteUrl || '';
+                deleteButton.dataset.name = data.name || '';
+            }
 
-            
+            // Nút chia sẻ
             if (shareLink) {
                 shareLink.hidden = !data.shareUrl;
 
-            if (data.shareUrl) {
-                shareLink.href = data.shareUrl;
-        } else {
-                shareLink.removeAttribute('href');
-         }
-      }
+                if (data.shareUrl) {
+                    shareLink.href = data.shareUrl;
+                } else {
+                    shareLink.removeAttribute('href');
+                }
+            }
 
+            // Nút ghép thiết bị người bệnh
+            if (pairLink) {
+                pairLink.hidden = !data.pairUrl;
+
+                if (data.pairUrl) {
+                    pairLink.href = data.pairUrl;
+                } else {
+                    pairLink.removeAttribute('href');
+                }
+            }
 
             modal.showModal();
         });
@@ -68,18 +87,20 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('donePatientModal')
         .addEventListener('click', () => modal.close());
 
-    // Mở Modal xác nhận xóa
-    deleteButton.addEventListener('click', function () {
-        if (!this.dataset.url) return;
+    // Mở Modal xác nhận gỡ hồ sơ
+    if (deleteButton && deleteForm) {
+        deleteButton.addEventListener('click', function () {
+            if (!this.dataset.url) return;
 
-        deleteForm.action = this.dataset.url;
-        setText('deletePatientName', this.dataset.name);
+            deleteForm.action = this.dataset.url;
+            setText('deletePatientName', this.dataset.name);
 
-        modal.close();
-        deleteModal.showModal();
-    });
+            modal.close();
+            deleteModal.showModal();
+        });
+    }
 
-    // Hủy xóa và quay về Modal chi tiết
+    // Hủy thao tác gỡ hồ sơ
     document.getElementById('cancelDeletePatient')
         .addEventListener('click', function () {
             deleteModal.close();

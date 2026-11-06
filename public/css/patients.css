@@ -606,5 +606,7 @@
     margin: 16px auto;
     background: #fff;
 }
-
+#pairPatientLink[hidden] {
+    display: none;
+}
 
