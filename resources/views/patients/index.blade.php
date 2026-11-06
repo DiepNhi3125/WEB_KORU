@@ -125,16 +125,57 @@
 
     <!-- Modal HTML5 xem chi tiết -->
     <dialog id="patientDetailModal" class="patient-modal" aria-labelledby="modalPatientName">
+
         <div class="patient-modal-header">
             <div class="patient-modal-avatar" id="modalAvatar" aria-hidden="true"></div>
+
             <div class="patient-modal-identity">
-                <p class="patient-modal-eyebrow">{{ __('CHI TIẾT HỒ SƠ') }}</p>
+                <p class="patient-modal-eyebrow">
+                    {{ __('CHI TIẾT HỒ SƠ') }}
+                </p>
                 <h2 id="modalPatientName"></h2>
                 <span id="modalPatientId"></span>
             </div>
-            <button type="button" class="patient-modal-close" id="closePatientModal"
-                aria-label="{{ __('Đóng') }}">&times;</button>
+
+            <!-- Các thao tác nhanh ở góc phải -->
+            <div class="patient-modal-quick-actions">
+
+                <!-- Chỉnh sửa -->
+                <a id="editPatientLink" class="patient-modal-icon" title="Chỉnh sửa hồ sơ" aria-label="Chỉnh sửa hồ sơ"
+                    hidden>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 20h4l10.5-10.5-4-4L4 16v4Z" />
+                        <path d="m13.5 6.5 4 4" />
+                    </svg>
+                </a>
+
+                <!-- Chia sẻ -->
+                <a id="sharePatientLink" class="patient-modal-icon" title="Chia sẻ hồ sơ" aria-label="Chia sẻ hồ sơ"
+                    hidden>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="5" r="3" />
+                        <circle cx="6" cy="12" r="3" />
+                        <circle cx="18" cy="19" r="3" />
+                        <path d="m8.7 10.7 6.6-4" />
+                        <path d="m8.7 13.3 6.6 4" />
+                    </svg>
+                </a>
+
+                <!-- Đóng Modal -->
+                <button type="button" id="closePatientModal" class="patient-modal-close patient-modal-icon" title="Đóng"
+                    aria-label="Đóng">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                        <path d="M18 6 6 18" />
+                        <path d="M6 6l12 12" />
+                    </svg>
+                </button>
+
+            </div>
         </div>
+
 
         <div class="patient-modal-body">
             <h3 class="patient-modal-section">{{ __('Thông tin cá nhân') }}</h3>
@@ -159,27 +200,41 @@
         </div>
 
 
+
         <div class="patient-modal-footer">
+
+            <!-- Thao tác nguy hiểm: nằm riêng bên trái -->
             <button type="button" id="deletePatientButton" class="patient-modal-delete" hidden>
-                Gỡ hồ sơ
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h18" />
+                    <path d="M8 6V4h8v2" />
+                    <path d="M5 6l1 15h12l1-15" />
+                    <path d="M10 10v7" />
+                    <path d="M14 10v7" />
+                </svg>
+                {{ __('Gỡ hồ sơ') }}
             </button>
 
-            <a id="pairPatientLink" class="patient-btn patient-btn-cancel" hidden>
-                {{ __('Ghép thiết bị') }}
-            </a>
+            <!-- Thao tác bên phải -->
+            <div class="patient-modal-footer-actions">
 
-            <a id="sharePatientLink" class="patient-btn patient-btn-cancel" hidden>
-                {{ __('Chia sẻ') }}
-            </a>
+                <button type="button" id="donePatientModal" class="patient-modal-done">
+                    {{ __('Đóng') }}
+                </button>
 
-            <a id="editPatientLink" class="patient-btn patient-btn-save" hidden>
-                {{ __('Chỉnh sửa') }}
-            </a>
+                <a id="pairPatientLink" class="patient-modal-pair" hidden>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="6" y="2" width="12" height="20" rx="2" />
+                        <path d="M11 18h2" />
+                    </svg>
+                    {{ __('Ghép thiết bị') }}
+                </a>
 
-            <button type="button" class="patient-modal-done" id="donePatientModal">
-                {{ __('Đóng') }}
-            </button>
+            </div>
         </div>
+
 
     </dialog>
 
