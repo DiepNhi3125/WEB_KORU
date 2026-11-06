@@ -569,4 +569,23 @@
     background: #b91c1c;
 }
 
+/* Các nút trên thanh quản lý hồ sơ */
+.patients-toolbar-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Điều chỉnh nhóm nút trong Modal */
+.patient-modal-footer {
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Ẩn nút chia sẻ khi không có quyền */
+#sharePatientLink[hidden] {
+    display: none;
+}
+
 

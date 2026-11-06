@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PatientSharingController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,12 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
         Route::post('/patients', [PatientController::class, 'store'])
             ->name('patients.store');
 
+        Route::get('/patients/join', [PatientSharingController::class, 'create'])
+            ->name('patients.join');
+
+        Route::post('/patients/join', [PatientSharingController::class, 'store'])
+            ->name('patients.join.store');
+
         Route::get('/patients/{patient}', [PatientController::class, 'show'])
             ->name('patients.detail');
 
@@ -51,6 +58,8 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
             Route::delete('/patients/{patient}', [PatientController::class, 'destroy'])
                 ->name('patients.destroy');
 
+            Route::get('/patients/{patient}/share', [PatientSharingController::class, 'show'])
+                ->name('patients.share');
 
         });
     });

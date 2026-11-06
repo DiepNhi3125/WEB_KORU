@@ -14,9 +14,17 @@
                     {{ __('Quản lý các hồ sơ bạn đang chăm sóc.') }}
                 </p>
             </div>
-            <a href="{{ route('patients.create') }}" class="patients-add-btn">
-                + {{ __('Thêm người bệnh') }}
-            </a>
+
+            <div class="patients-toolbar-actions">
+                <a href="{{ route('patients.join') }}" class="patient-btn patient-btn-cancel">
+                    {{ __('Nhập mã chia sẻ') }}
+                </a>
+
+                <a href="{{ route('patients.create') }}" class="patients-add-btn">
+                    + {{ __('Thêm người bệnh') }}
+                </a>
+            </div>
+
         </div>
 
 
@@ -54,6 +62,7 @@
                                 data-phone="{{ $patient->phone ? '*******' . substr($patient->phone, -3) : __('Chưa cập nhật') }}"
                                 data-owner="{{ Auth::user()->name }}" data-edit-url="{{ route('patients.edit', $patient) }}"
                                 data-delete-url="{{ route('patients.destroy', $patient) }}"
+                                data-share-url="{{ route('patients.share', $patient) }}"
                                 aria-label="{{ __('Xem chi tiết') }} {{ $patient->full_name }}">
                                 {{ __('Xem chi tiết') }}
                             </button>
@@ -154,6 +163,10 @@
                 Gỡ hồ sơ
             </button>
 
+            <a id="sharePatientLink" class="patient-btn patient-btn-cancel" hidden>
+                {{ __('Chia sẻ') }}
+            </a>
+
             <a id="editPatientLink" class="patient-btn patient-btn-save" hidden>
                 {{ __('Chỉnh sửa') }}
             </a>
@@ -164,44 +177,40 @@
         </div>
 
     </dialog>
-    
-<!-- Modal xác nhận gỡ hồ sơ -->
-<dialog id="patientDeleteModal"
-        class="patient-delete-modal"
-        aria-labelledby="patientDeleteTitle">
 
-    <h2 id="patientDeleteTitle" class="patient-delete-title">
-        Xác nhận gỡ hồ sơ
-    </h2>
+    <!-- Modal xác nhận gỡ hồ sơ -->
+    <dialog id="patientDeleteModal" class="patient-delete-modal" aria-labelledby="patientDeleteTitle">
 
-    <p class="patient-delete-description">
-        Bạn có chắc muốn gỡ hồ sơ
-        <strong id="deletePatientName"></strong>?
-    </p>
+        <h2 id="patientDeleteTitle" class="patient-delete-title">
+            Xác nhận gỡ hồ sơ
+        </h2>
 
-    <p class="patient-delete-warning">
-        Thao tác này sẽ xóa vĩnh viễn hồ sơ, lịch nhắc thuốc,
-        lịch sử uống thuốc và các liên kết liên quan.
-        Dữ liệu đã xóa không thể khôi phục qua ứng dụng.
-    </p>
+        <p class="patient-delete-description">
+            Bạn có chắc muốn gỡ hồ sơ
+            <strong id="deletePatientName"></strong>?
+        </p>
 
-    <form id="patientDeleteForm" method="POST">
-        @csrf
-        @method('DELETE')
+        <p class="patient-delete-warning">
+            Thao tác này sẽ xóa vĩnh viễn hồ sơ, lịch nhắc thuốc,
+            lịch sử uống thuốc và các liên kết liên quan.
+            Dữ liệu đã xóa không thể khôi phục qua ứng dụng.
+        </p>
 
-        <div class="patient-delete-actions">
-            <button type="button"
-                    id="cancelDeletePatient"
-                    class="patient-delete-cancel">
-                Hủy
-            </button>
+        <form id="patientDeleteForm" method="POST">
+            @csrf
+            @method('DELETE')
 
-            <button type="submit" class="patient-delete-confirm">
-                Xóa vĩnh viễn
-            </button>
-        </div>
-    </form>
-</dialog>
+            <div class="patient-delete-actions">
+                <button type="button" id="cancelDeletePatient" class="patient-delete-cancel">
+                    Hủy
+                </button>
+
+                <button type="submit" class="patient-delete-confirm">
+                    Xóa vĩnh viễn
+                </button>
+            </div>
+        </form>
+    </dialog>
 
     <!-- File Javascript điều khiển Modal -->
     <script src="{{ asset('js/patient-modal.js') }}" defer></script>

@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!modal || !deleteModal) return;
 
     const editLink = document.getElementById('editPatientLink');
+    const shareLink = document.getElementById('sharePatientLink');
     const deleteButton = document.getElementById('deletePatientButton');
     const deleteForm = document.getElementById('patientDeleteForm');
 
@@ -43,6 +44,18 @@ document.addEventListener('DOMContentLoaded', function () {
             deleteButton.hidden = !data.deleteUrl;
             deleteButton.dataset.url = data.deleteUrl || '';
             deleteButton.dataset.name = data.name;
+
+            
+            if (shareLink) {
+                shareLink.hidden = !data.shareUrl;
+
+            if (data.shareUrl) {
+                shareLink.href = data.shareUrl;
+        } else {
+                shareLink.removeAttribute('href');
+         }
+      }
+
 
             modal.showModal();
         });
