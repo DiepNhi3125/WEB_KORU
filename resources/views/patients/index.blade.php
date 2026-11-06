@@ -19,11 +19,7 @@
             </a>
         </div>
 
-        @if (session('status'))
-            <div class="patients-alert">
-                {{ session('status') }}
-            </div>
-        @endif
+      
 
         <!-- Hồ sơ do người dùng sở hữu -->
         <section class="patients-section">
@@ -152,6 +148,9 @@
         </div>
 
         <div class="patient-modal-footer">
+            <a id="editPatientLink" class="patient-btn patient-btn-save" hidden>
+                {{ __('Chỉnh sửa') }}
+            </a>
             <button type="button" class="patient-modal-done" id="donePatientModal">
                 {{ __('Đóng') }}
             </button>

@@ -28,12 +28,15 @@ document.addEventListener('DOMContentLoaded', function () {
             setText('modalGender', genders[data.gender] || 'Chưa cập nhật');
             setText('modalPhone', data.phone);
             setText('modalOwner', data.owner);
-            editLink.hidden = !data.editUrl;
+            
+ if (editLink) {
+    editLink.hidden = !data.editUrl;
 
-if (data.editUrl) {
-    editLink.href = data.editUrl;
-} else {
-    editLink.removeAttribute('href');
+    if (data.editUrl) {
+        editLink.href = data.editUrl;
+    } else {
+        editLink.removeAttribute('href');
+    }
 }
 
             modal.showModal();

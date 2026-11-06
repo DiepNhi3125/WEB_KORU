@@ -24,13 +24,8 @@
                     <label for="full_name" class="patient-form-label">
                         {{ __('Họ và tên') }} <span class="patient-required">*</span>
                     </label>
-                    <input type="text"
-                        id="full_name"
-                        name="full_name"
-                        class="patient-form-input"
-                        value="{{ old('full_name', $patient->full_name) }}"
-                        maxlength="255"
-                        required>
+                    <input type="text" id="full_name" name="full_name" class="patient-form-input"
+                        value="{{ old('full_name', $patient->full_name) }}" maxlength="255" required>
                     @error('full_name')
                         <p class="patient-form-error">{{ $message }}</p>
                     @enderror
@@ -41,10 +36,7 @@
                     <label for="birth_date" class="patient-form-label">
                         {{ __('Ngày sinh') }}
                     </label>
-                    <input type="date"
-                        id="birth_date"
-                        name="birth_date"
-                        class="patient-form-input"
+                    <input type="date" id="birth_date" name="birth_date" class="patient-form-input"
                         value="{{ old('birth_date', !empty($patient->birth_date) ? date('Y-m-d', strtotime($patient->birth_date)) : '') }}"
                         max="{{ date('Y-m-d') }}">
                     @error('birth_date')
@@ -76,21 +68,22 @@
 
                 <!-- Số điện thoại -->
                 <div class="patient-form-group">
-                    <label for="phone" class="patient-form-label">
-                        {{ __('Số điện thoại') }} <span class="patient-required">*</span>
+                    <label class="patient-form-label">
+                        {{ __('Số điện thoại') }}
                     </label>
-                    <input type="tel"
-                        id="phone"
-                        name="phone"
-                        class="patient-form-input"
-                        value="{{ old('phone', $patient->phone) }}"
-                        maxlength="10"
-                        inputmode="numeric"
-                        required>
-                    @error('phone')
-                        <p class="patient-form-error">{{ $message }}</p>
-                    @enderror
+
+                    <div class="patient-form-input patient-input-locked">
+                        <span>
+                            {{ $patient->phone? '*******' . substr($patient->phone, -3): __('Chưa cập nhật') }}
+                        </span>
+                        
+                    </div>
+
+                    <p class="patient-form-hint">
+                        {{ __('Số điện thoại không thể thay đổi. Muốn sử dụng số khác, cần xóa hồ sơ cũ và tạo hồ sơ mới.') }}
+                    </p>
                 </div>
+
 
                 <!-- Các nút hành động -->
                 <div class="patient-form-actions">
