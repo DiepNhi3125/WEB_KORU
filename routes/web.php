@@ -55,6 +55,7 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
             ->name('reminders.index');
         // Xem chi tiết lịch nhắc
         Route::get('/patients/{patient}/reminders/{reminder}', [ReminderController::class, 'show'])
+            ->whereNumber('reminder')
             ->middleware('patient.access')
             ->name('reminders.show');
 
