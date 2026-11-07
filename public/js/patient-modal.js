@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const editLink = document.getElementById('editPatientLink');
     const pairLink = document.getElementById('pairPatientLink');
+    const remindersLink = document.getElementById('remindersPatientLink');
     const shareLink = document.getElementById('sharePatientLink');
     const deleteButton = document.getElementById('deletePatientButton');
     const deleteForm = document.getElementById('patientDeleteForm');
@@ -75,6 +76,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     pairLink.removeAttribute('href');
                 }
             }
+            // Nút xem lịch nhắc uống thuốc
+if (remindersLink) {
+    remindersLink.hidden = !data.remindersUrl;
+
+    if (data.remindersUrl) {
+        remindersLink.href = data.remindersUrl;
+    } else {
+        remindersLink.removeAttribute('href');
+    }
+}
 
             modal.showModal();
         });

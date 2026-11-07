@@ -700,3 +700,26 @@
         justify-content: flex-end;
     }
 }
+/* Liên kết lịch nhắc trong Modal hồ sơ */
+.patient-modal-reminders {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 6px;
+    color: #3474f5;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.patient-modal-reminders:hover {
+    color: #1f5fdd;
+    text-decoration: underline;
+}
+
+.patient-modal-reminders[hidden] {
+    display: none;
+}

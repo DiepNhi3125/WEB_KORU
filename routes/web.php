@@ -53,7 +53,11 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
         Route::get('/patients/{patient}/reminders', [ReminderController::class, 'index'])
             ->middleware('patient.access')
             ->name('reminders.index');
-            
+        // Xem chi tiết lịch nhắc
+        Route::get('/patients/{patient}/reminders/{reminder}', [ReminderController::class, 'show'])
+            ->middleware('patient.access')
+            ->name('reminders.show');
+
 
         // Chỉ người chăm sóc chính được chỉnh sửa
         Route::middleware('patient.owner')->group(function () {

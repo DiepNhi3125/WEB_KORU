@@ -26,6 +26,20 @@ class ReminderController extends Controller
         ));
     }
 
+    public function show(Patient $patient, $reminder)
+    {
+        $reminder = $patient->reminders()
+            ->with([
+                'doseTimes' => function ($query) {
+                    $query->orderBy('time_of_day');
+                }
+            ])
+            ->findOrFail($reminder);
+
+        return view('reminders.show', compact('patient', 'reminder'));
+    }
+
+
     // Chỉ người chăm sóc chính được tạo lịch
     public function create(Patient $patient)
     {

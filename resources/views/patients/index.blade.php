@@ -64,6 +64,7 @@
                                 data-delete-url="{{ route('patients.destroy', $patient) }}"
                                 data-share-url="{{ route('patients.share', $patient) }}"
                                 data-pair-url="{{ route('patients.pair', $patient) }}"
+                                data-reminders-url="{{ route('reminders.index', $patient) }}"
                                 aria-label="{{ __('Xem chi tiết') }} {{ $patient->full_name }}">
                                 {{ __('Xem chi tiết') }}
                             </button>
@@ -109,6 +110,7 @@
                                 data-gender="{{ $patient->gender }}"
                                 data-phone="{{ $patient->phone ? '*******' . substr($patient->phone, -3) : 'Chưa cập nhật' }}"
                                 data-owner="{{ isset($patient->owner) ? $patient->owner->name : __('Chưa xác định') }}"
+                                data-reminders-url="{{ route('reminders.index', $patient) }}"
                                 aria-label="{{ __('Xem chi tiết') }} {{ $patient->full_name }}">
                                 {{ __('Xem chi tiết') }}
                             </button>
@@ -219,6 +221,16 @@
             <!-- Thao tác bên phải -->
             <div class="patient-modal-footer-actions">
 
+                <a id="remindersPatientLink" class="patient-modal-reminders" hidden>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="13" r="8" />
+                        <path d="M12 9v4l3 2" />
+                        <path d="M5 3 2 6" />
+                        <path d="m19 3 3 3" />
+                    </svg>
+                    {{ __('Lịch nhắc') }}
+                </a>
 
                 <a id="pairPatientLink" class="patient-modal-pair" hidden>
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
