@@ -875,3 +875,21 @@
         flex-wrap: wrap;
     }
 }
+
+/* Nhóm nút thao tác trên danh sách */
+.rm-list-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+    .rm-list-actions {
+        width: 100%;
+    }
+
+    .rm-list-actions .rm-list-create {
+        flex: 1;
+    }
+}

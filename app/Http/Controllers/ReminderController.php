@@ -49,9 +49,6 @@ class ReminderController extends Controller
         $displayNumber = $patient->reminders()
             ->where('id', '<=', $reminder->id)
             ->count();
-        $displayNumber = $patient->reminders()
-            ->where('id', '<=', $reminder->id)
-            ->count();
         return view('reminders.show', compact('patient', 'reminder', 'displayNumber'));
     }
 
