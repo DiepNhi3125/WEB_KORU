@@ -1,4 +1,3 @@
-
 <x-app-layout>
 
     <link rel="stylesheet" href="{{ asset('css/reminders.css') }}">
@@ -6,17 +5,19 @@
     @php
         // Các mốc giờ đang áp dụng
         $currentTimes = $reminder->doseTimes
-            ->filter(fn ($doseTime) =>
-                $doseTime->status === 'active'
-                && $doseTime->effective_until === null
+            ->filter(
+                fn($doseTime) =>
+                    $doseTime->status === 'active'
+                    && $doseTime->effective_until === null
             )
             ->sortBy('time_of_day');
 
         // Các mốc giờ đã ngừng áp dụng
         $historyTimes = $reminder->doseTimes
-            ->filter(fn ($doseTime) =>
-                $doseTime->status !== 'active'
-                || $doseTime->effective_until !== null
+            ->filter(
+                fn($doseTime) =>
+                    $doseTime->status !== 'active'
+                    || $doseTime->effective_until !== null
             )
             ->sortBy('time_of_day');
     @endphp
@@ -32,12 +33,9 @@
 
                 <div class="rm-detail-person">
 
-                    <svg viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="1.8">
-                        <circle cx="12" cy="8" r="4"/>
-                        <path d="M4 21v-2a8 8 0 0 1 16 0v2"/>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 21v-2a8 8 0 0 1 16 0v2" />
                     </svg>
 
                     <span>
@@ -49,23 +47,44 @@
 
             </div>
 
-            <!-- Trạng thái lịch nhắc -->
-            <span class="rm-status
-                {{ $reminder->status === 'active'
-                    ? 'rm-status--active'
-                    : ($reminder->status === 'stopped'
-                        ? 'rm-status--stopped'
-                        : '') }}">
 
-                @if ($reminder->status === 'active')
-                    Đang hoạt động
-                @elseif ($reminder->status === 'stopped')
-                    Đã dừng
-                @else
-                    {{ $reminder->status }}
+            <!-- Các thao tác với lịch nhắc -->
+            <div class="rm-detail-actions">
+
+                @if (
+                                    (int) $patient->owner_id === (int) auth()->id()
+                                    && $reminder->status === 'active'
+                                )
+                                <a href="{{ route('reminders.edit', [
+                        'patient' => $patient,
+                        'reminder' => $reminder->id
+                    ]) }}" class="rm-detail-edit">
+
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                        <path d="M12 20h9" />
+                                        <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4Z" />
+                                    </svg>
+
+                                    Chỉnh sửa
+                                </a>
                 @endif
 
-            </span>
+                <!-- Trạng thái lịch nhắc -->
+                <span class="rm-status
+        {{ $reminder->status === 'active'? 'rm-status--active': ($reminder->status === 'stopped'? 'rm-status--stopped': '') }}">
+
+                    @if ($reminder->status === 'active')
+                        Đang hoạt động
+                    @elseif ($reminder->status === 'stopped')
+                        Đã dừng
+                    @else
+                        {{ $reminder->status }}
+                    @endif
+
+                </span>
+
+            </div>
+
 
         </div>
 
@@ -82,13 +101,9 @@
 
                         <div class="rm-panel-icon">
 
-                            <svg viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 stroke-width="1.8">
-                                <rect x="3" y="5"
-                                      width="18" height="16" rx="2"/>
-                                <path d="M7 3v4M17 3v4M3 10h18"/>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <rect x="3" y="5" width="18" height="16" rx="2" />
+                                <path d="M7 3v4M17 3v4M3 10h18" />
                             </svg>
 
                         </div>
@@ -117,11 +132,8 @@
                         <!-- Mũi tên -->
                         <div class="rm-date-separator">
 
-                            <svg viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 stroke-width="2">
-                                <path d="M5 12h14m-6-6 6 6-6 6"/>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14m-6-6 6 6-6 6" />
                             </svg>
 
                         </div>
@@ -150,12 +162,9 @@
 
                         <div class="rm-panel-icon">
 
-                            <svg viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 stroke-width="1.8">
-                                <circle cx="12" cy="12" r="9"/>
-                                <path d="M12 7v5l3 2"/>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M12 7v5l3 2" />
                             </svg>
 
                         </div>
@@ -182,12 +191,9 @@
                                 <!-- Giờ uống -->
                                 <div class="rm-dose-clock">
 
-                                    <svg viewBox="0 0 24 24"
-                                         fill="none"
-                                         stroke="currentColor"
-                                         stroke-width="1.8">
-                                        <circle cx="12" cy="12" r="9"/>
-                                        <path d="M12 7v5l3 2"/>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                        <circle cx="12" cy="12" r="9" />
+                                        <path d="M12 7v5l3 2" />
                                     </svg>
 
                                     {{ substr($doseTime->time_of_day, 0, 5) }}
@@ -229,8 +235,7 @@
 
                         <div class="mt-6 pt-5 border-t border-gray-100">
 
-                            <h3 class="text-sm font-bold mb-4"
-                                style="color: #0c235a;">
+                            <h3 class="text-sm font-bold mb-4" style="color: #0c235a;">
                                 Lịch sử giờ uống
                             </h3>
 
@@ -291,14 +296,11 @@
 
                     <div class="rm-panel-icon">
 
-                        <svg viewBox="0 0 24 24"
-                             fill="none"
-                             stroke="currentColor"
-                             stroke-width="1.8">
-                            <path d="M20 7h-9a4 4 0 0 0-4 4v1"/>
-                            <path d="M4 17h9a4 4 0 0 0 4-4v-1"/>
-                            <path d="M16 4l4 3-4 3"/>
-                            <path d="M8 14l-4 3 4 3"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M20 7h-9a4 4 0 0 0-4 4v1" />
+                            <path d="M4 17h9a4 4 0 0 0 4-4v-1" />
+                            <path d="M16 4l4 3-4 3" />
+                            <path d="M8 14l-4 3 4 3" />
                         </svg>
 
                     </div>
@@ -365,14 +367,10 @@
         <!-- 3. QUAY LẠI DANH SÁCH -->
         <div class="rm-page-actions">
 
-            <a href="{{ route('reminders.index', $patient) }}"
-               class="rm-back-link">
+            <a href="{{ route('reminders.index', $patient) }}" class="rm-back-link">
 
-                <svg viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="2">
-                    <path d="M19 12H5m6-6-6 6 6 6"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5m6-6-6 6 6 6" />
                 </svg>
 
                 Quay lại danh sách lịch nhắc

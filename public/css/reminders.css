@@ -899,3 +899,49 @@
         width: 100%;
     }
 }
+
+
+/* Thao tác tại trang chi tiết lịch nhắc */
+
+.rm-detail-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.rm-detail-edit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 9px 14px;
+    border: 1px solid #dbe4f0;
+    border-radius: 9px;
+    background: #fff;
+    color: #3474f5;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+}
+
+.rm-detail-edit:hover {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+    color: #1f5fdd;
+}
+
+.rm-detail-edit svg {
+    width: 16px;
+    height: 16px;
+}
+
+@media (max-width: 600px) {
+    .rm-detail-actions {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}
