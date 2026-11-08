@@ -1,10 +1,10 @@
 
 /* ==========================================
-   KORU - QUẢN LÝ LỊCH NHẮC
-   Danh sách và chi tiết lịch nhắc
+   KORU - QUẢN LÝ LỊCH NHẮC UỐNG THUỐC
+   Danh sách, Chi tiết, Chỉnh sửa
    ========================================== */
 
-/* ===== 1. CHUNG ===== */
+/* ===== 1. THIẾT LẬP CHUNG ===== */
 
 .rm-page,
 .rm-list-page {
@@ -39,8 +39,6 @@
 
 /* ===== 2. DANH SÁCH LỊCH NHẮC ===== */
 
-/* Tiêu đề */
-
 .rm-list-top {
     display: flex;
     align-items: center;
@@ -62,8 +60,6 @@
     font-size: 14px;
 }
 
-/* Nút tạo lịch */
-
 .rm-list-create {
     display: inline-flex;
     align-items: center;
@@ -72,7 +68,7 @@
     padding: 11px 18px;
     border-radius: 10px;
     background: var(--rm-blue);
-    color: white;
+    color: #fff;
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;
@@ -81,14 +77,12 @@
 
 .rm-list-create:hover {
     background: #1f5fdd;
-    color: white;
+    color: #fff;
 }
-
-/* Khung danh sách */
 
 .rm-list-panel,
 .rm-panel {
-    background: white;
+    background: #fff;
     border: 1px solid var(--rm-border);
     border-radius: 14px;
     box-shadow: 0 3px 12px rgba(12, 35, 90, 0.03);
@@ -121,7 +115,7 @@
     border: 1px solid #dbe4f0;
     border-radius: 9px;
     color: var(--rm-navy);
-    background: white;
+    background: #fff;
     font-size: 13px;
 }
 
@@ -287,29 +281,7 @@
 
 /* ===== 3. CHI TIẾT LỊCH NHẮC ===== */
 
-.rm-breadcrumb {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 9px;
-    margin-bottom: 24px;
-    color: #94a3b8;
-    font-size: 13px;
-}
-
-.rm-breadcrumb a,
-.rm-back-link,
-.rm-list-back {
-    color: #547198;
-    text-decoration: none;
-}
-
-.rm-breadcrumb a:hover,
-.rm-back-link:hover,
-.rm-list-back:hover {
-    color: var(--rm-blue);
-}
-
-/* Tiêu đề chi tiết */
+/* Tiêu đề và thông tin người bệnh */
 
 .rm-detail-heading {
     display: flex;
@@ -329,14 +301,6 @@
     font-size: 26px;
     font-weight: 700;
     overflow-wrap: anywhere;
-}
-
-.rm-eyebrow {
-    margin: 0 0 8px;
-    color: var(--rm-blue);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.4px;
 }
 
 .rm-detail-person {
@@ -409,7 +373,7 @@
     font-size: 13px;
 }
 
-/* Ngày bắt đầu - kết thúc */
+/* Ngày bắt đầu và kết thúc */
 
 .rm-dates {
     display: grid;
@@ -443,7 +407,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: white;
+    background: #fff;
     color: var(--rm-blue);
 }
 
@@ -452,7 +416,7 @@
     height: 17px;
 }
 
-/* Các mốc giờ uống */
+/* Các mốc giờ uống thuốc */
 
 .rm-dose-list {
     gap: 10px;
@@ -484,12 +448,6 @@
 
 .rm-dose-info {
     gap: 5px;
-}
-
-.rm-dose-label {
-    color: #31496f;
-    font-size: 13px;
-    font-weight: 600;
 }
 
 .rm-dose-range,
@@ -548,22 +506,7 @@
     font-weight: 600;
 }
 
-.rm-tip {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin-top: 15px;
-    color: var(--rm-muted);
-    font-size: 12px;
-}
-
-.rm-tip svg {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-}
-
-/* ===== 4. ĐIỀU HƯỚNG ===== */
+/* Điều hướng quay lại */
 
 .rm-page-actions {
     margin-top: 24px;
@@ -574,8 +517,15 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    color: #547198;
     font-size: 13px;
     font-weight: 600;
+    text-decoration: none;
+}
+
+.rm-back-link:hover,
+.rm-list-back:hover {
+    color: var(--rm-blue);
 }
 
 .rm-list-back {
@@ -587,128 +537,7 @@
     height: 17px;
 }
 
-/* ===== 5. RESPONSIVE ===== */
-
-@media (max-width: 900px) {
-    .rm-list-tools {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .rm-list-search {
-        max-width: none;
-    }
-
-    .rm-list-head {
-        display: none;
-    }
-
-    .rm-list-row {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
-
-    .rm-list-name,
-    .rm-list-date,
-    .rm-list-action {
-        grid-column: 1 / -1;
-    }
-
-    .rm-list-action {
-        text-align: left;
-    }
-
-    .rm-detail-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .rm-rule {
-        position: static;
-    }
-}
-
-@media (max-width: 600px) {
-    .rm-page,
-    .rm-list-page {
-        padding: 24px 16px 44px;
-    }
-
-    .rm-list-top,
-    .rm-detail-heading {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .rm-list-create {
-        width: 100%;
-    }
-
-    .rm-list-title,
-    .rm-detail-title h1 {
-        font-size: 24px;
-    }
-
-    .rm-list-tools,
-    .rm-list-row {
-        padding: 14px;
-    }
-
-    .rm-panel {
-        padding: 18px;
-    }
-
-    .rm-dates {
-        padding: 14px;
-        gap: 8px;
-    }
-
-    .rm-date-value {
-        font-size: 13px;
-    }
-
-    .rm-dose {
-        flex-direction: column;
-        gap: 8px;
-    }
-}
-
-/* Đường dẫn điều hướng ở header */
-
-.rm-header-crumb {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.5;
-    color: #64748b;
-}
-
-.rm-header-crumb a {
-    color: #3474f5;
-    text-decoration: none;
-}
-
-.rm-header-crumb a:hover {
-    color: #1f5fdd;
-    text-decoration: underline;
-}
-
-.rm-header-crumb > span:not([aria-current]) {
-    color: #94a3b8;
-}
-
-.rm-header-crumb [aria-current="page"] {
-    color: #0c235a;
-    font-weight: 600;
-}
-
-
-/* ==========================================
-   TRANG CHỈNH SỬA LỊCH NHẮC
-   ========================================== */
+/* ===== 4. CHỈNH SỬA LỊCH NHẮC ===== */
 
 .rm-edit-heading {
     margin-bottom: 22px;
@@ -769,7 +598,7 @@
     padding: 10px 12px;
     border: 1px solid #dbe4f0;
     border-radius: 9px;
-    background: white;
+    background: #fff;
     color: #0c235a;
     font-family: inherit;
     font-size: 14px;
@@ -870,38 +699,21 @@
 
 .rm-edit-cancel {
     border: 1px solid #dbe4f0;
-    background: white;
+    background: #fff;
     color: #64748b;
 }
 
 .rm-edit-save {
     border: 1px solid #3474f5;
     background: #3474f5;
-    color: white;
+    color: #fff;
 }
 
 .rm-edit-save:hover {
     background: #1f5fdd;
 }
 
-@media (max-width: 600px) {
-    .rm-edit-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .rm-edit-actions {
-        flex-direction: column-reverse;
-        align-items: stretch;
-    }
-
-    .rm-edit-cancel,
-    .rm-edit-save {
-        width: 100%;
-    }
-}
-
-
-/* Thao tác tại trang chi tiết lịch nhắc */
+/* ===== 5. THAO TÁC TRANG CHI TIẾT ===== */
 
 .rm-detail-actions {
     display: flex;
@@ -939,16 +751,6 @@
     height: 16px;
 }
 
-@media (max-width: 600px) {
-    .rm-detail-actions {
-        justify-content: flex-start;
-        flex-wrap: wrap;
-    }
-}
-
-
-/* Nút dừng lịch nhắc */
-
 .rm-detail-stop {
     display: inline-flex;
     align-items: center;
@@ -968,4 +770,108 @@
 .rm-detail-stop:hover {
     background: #fef2f2;
     border-color: #fca5a5;
+}
+
+/* ===== 6. RESPONSIVE ===== */
+
+@media (max-width: 900px) {
+    .rm-list-tools {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .rm-list-search {
+        max-width: none;
+    }
+
+    .rm-list-head {
+        display: none;
+    }
+
+    .rm-list-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .rm-list-name,
+    .rm-list-date,
+    .rm-list-action {
+        grid-column: 1 / -1;
+    }
+
+    .rm-list-action {
+        text-align: left;
+    }
+
+    .rm-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rm-rule {
+        position: static;
+    }
+}
+
+@media (max-width: 600px) {
+    .rm-page,
+    .rm-list-page {
+        padding: 24px 16px 44px;
+    }
+
+    .rm-list-top,
+    .rm-detail-heading {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .rm-list-create {
+        width: 100%;
+    }
+
+    .rm-list-title,
+    .rm-detail-title h1 {
+        font-size: 24px;
+    }
+
+    .rm-list-tools,
+    .rm-list-row {
+        padding: 14px;
+    }
+
+    .rm-panel {
+        padding: 18px;
+    }
+
+    .rm-dates {
+        padding: 14px;
+        gap: 8px;
+    }
+
+    .rm-date-value {
+        font-size: 13px;
+    }
+
+    .rm-dose {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .rm-edit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rm-edit-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .rm-edit-cancel,
+    .rm-edit-save {
+        width: 100%;
+    }
+
+    .rm-detail-actions {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
 }

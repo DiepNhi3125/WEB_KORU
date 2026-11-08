@@ -18,13 +18,21 @@ class ReminderController extends Controller
 
         $reminders = $patient->reminders()
             ->with('doseTimes')
-            ->orderByDesc('created_at')
+            ->orderBy('id', 'asc')
             ->get();
 
+        // Đánh số lịch riêng cho từng người bệnh theo thứ tự tạo
+        $reminderNumbers = $reminders
+            ->sortBy('id')
+            ->values()
+            ->mapWithKeys(
+                fn($item, $index) => [$item->id => $index + 1]
+            );
         return view('reminders.index', compact(
             'patient',
             'reminders',
-            'isOwner'
+            'isOwner',
+            'reminderNumbers'
         ));
     }
 
@@ -37,8 +45,14 @@ class ReminderController extends Controller
                 }
             ])
             ->findOrFail($reminder);
-
-        return view('reminders.show', compact('patient', 'reminder'));
+        // Số thứ tự của lịch trong hồ sơ người bệnh
+        $displayNumber = $patient->reminders()
+            ->where('id', '<=', $reminder->id)
+            ->count();
+        $displayNumber = $patient->reminders()
+            ->where('id', '<=', $reminder->id)
+            ->count();
+        return view('reminders.show', compact('patient', 'reminder', 'displayNumber'));
     }
 
 
