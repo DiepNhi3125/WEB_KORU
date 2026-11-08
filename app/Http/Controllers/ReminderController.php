@@ -21,18 +21,10 @@ class ReminderController extends Controller
             ->orderBy('id', 'asc')
             ->get();
 
-        // Đánh số lịch riêng cho từng người bệnh theo thứ tự tạo
-        $reminderNumbers = $reminders
-            ->sortBy('id')
-            ->values()
-            ->mapWithKeys(
-                fn($item, $index) => [$item->id => $index + 1]
-            );
         return view('reminders.index', compact(
             'patient',
             'reminders',
-            'isOwner',
-            'reminderNumbers'
+            'isOwner'
         ));
     }
 
