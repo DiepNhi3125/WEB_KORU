@@ -63,6 +63,7 @@
                 'patients.pair' => 'Ghép thiết bị',
                 'reminders.create' => 'Tạo lịch nhắc',
                 'reminders.show' => 'Chi tiết',
+                'reminders.edit' => 'Chỉnh sửa',
             ];
         @endphp
 

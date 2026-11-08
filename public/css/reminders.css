@@ -704,3 +704,198 @@
     color: #0c235a;
     font-weight: 600;
 }
+
+
+/* ==========================================
+   TRANG CHỈNH SỬA LỊCH NHẮC
+   ========================================== */
+
+.rm-edit-heading {
+    margin-bottom: 22px;
+}
+
+.rm-edit-heading h1 {
+    margin: 0;
+    color: #0c235a;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.rm-edit-heading p {
+    margin: 5px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.rm-edit-form {
+    display: grid;
+    gap: 18px;
+    max-width: 780px;
+}
+
+.rm-edit-section-title {
+    margin: 0 0 20px;
+    color: #0c235a;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.rm-edit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.rm-edit-field {
+    margin-bottom: 18px;
+    min-width: 0;
+}
+
+.rm-edit-grid .rm-edit-field {
+    margin-bottom: 0;
+}
+
+.rm-edit-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #29416f;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.rm-edit-input {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #dbe4f0;
+    border-radius: 9px;
+    background: white;
+    color: #0c235a;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.rm-edit-input:focus {
+    outline: none;
+    border-color: #3474f5;
+    box-shadow: 0 0 0 3px rgba(52, 116, 245, 0.12);
+}
+
+.rm-edit-input[readonly] {
+    background: #f8fafc;
+    color: #64748b;
+}
+
+.rm-edit-hint {
+    margin: 8px 0 16px;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.rm-edit-error {
+    margin: 7px 0 0;
+    color: #e11d48;
+    font-size: 12px;
+}
+
+.rm-edit-times {
+    display: grid;
+    gap: 10px;
+    margin: 14px 0;
+}
+
+.rm-edit-time-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rm-edit-time-row .rm-edit-input {
+    max-width: 220px;
+}
+
+.rm-edit-remove {
+    padding: 9px 12px;
+    border: 0;
+    background: transparent;
+    color: #dc2626;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.rm-edit-remove:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.rm-edit-add {
+    padding: 8px 0;
+    border: 0;
+    background: none;
+    color: #3474f5;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.rm-edit-add:disabled {
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+.rm-edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.rm-edit-cancel,
+.rm-edit-save {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 42px;
+    padding: 10px 20px;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.rm-edit-cancel {
+    border: 1px solid #dbe4f0;
+    background: white;
+    color: #64748b;
+}
+
+.rm-edit-save {
+    border: 1px solid #3474f5;
+    background: #3474f5;
+    color: white;
+}
+
+.rm-edit-save:hover {
+    background: #1f5fdd;
+}
+
+@media (max-width: 600px) {
+    .rm-edit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rm-edit-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .rm-edit-cancel,
+    .rm-edit-save {
+        width: 100%;
+    }
+}

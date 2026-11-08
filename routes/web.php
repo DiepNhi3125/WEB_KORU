@@ -85,6 +85,15 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
                 ->name('reminders.create');
             Route::post('/patients/{patient}/reminders', [ReminderController::class, 'store'])
                 ->name('reminders.store');
+
+            Route::get('/patients/{patient}/reminders/{reminder}/edit',[ReminderController::class, 'edit'])
+                ->whereNumber('reminder')
+                ->name('reminders.edit');
+
+            // Lưu thông tin lịch nhắc đã chỉnh sửa
+            Route::patch('/patients/{patient}/reminders/{reminder}',[ReminderController::class, 'update'])
+                ->whereNumber('reminder')
+                ->name('reminders.update');
         });
     });
 
