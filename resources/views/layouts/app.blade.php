@@ -42,14 +42,119 @@
         </div>
 
 
+
         <!-- Page Heading -->
-        @isset($header)
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
+        @php
+            $isManagementPage = request()->routeIs(
+                'patients.*',
+                'reminders.*',
+                'dashboard',
+                'profile.*'
+            );
+
+            $routeName = request()->route()?->getName();
+
+            $pageLabels = [
+                'patients.create' => 'Tạo hồ sơ',
+                'patients.edit' => 'Chỉnh sửa hồ sơ',
+                'patients.detail' => 'Chi tiết hồ sơ',
+                'patients.join' => 'Liên kết hồ sơ',
+                'patients.share' => 'Chia sẻ hồ sơ',
+                'patients.pair' => 'Ghép thiết bị',
+                'reminders.create' => 'Tạo lịch nhắc',
+                'reminders.show' => 'Chi tiết',
+            ];
+        @endphp
+
+        @if($isManagementPage || isset($header))
+            <header class="bg-white border-b border-gray-100">
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+                        {{ $isManagementPage ? 'py-3' : 'py-6' }}">
+
+                    @if ($isManagementPage)
+
+                        <nav class="koru-breadcrumb" aria-label="Đường dẫn điều hướng">
+
+                            @if (request()->routeIs('dashboard'))
+
+                                <span aria-current="page">
+                                    Bảng điều khiển
+                                </span>
+
+                            @elseif (request()->routeIs('profile.*'))
+
+                                <a href="{{ route('dashboard') }}">
+                                    Bảng điều khiển
+                                </a>
+
+                                <span class="koru-breadcrumb-separator">/</span>
+
+                                <span aria-current="page">
+                                    Hồ sơ tài khoản
+                                </span>
+
+                            @elseif (request()->routeIs('patients.index'))
+
+                                <span aria-current="page">
+                                    Hồ sơ người bệnh
+                                </span>
+
+                            @else
+
+                                <a href="{{ route('patients.index') }}">
+                                    Hồ sơ người bệnh
+                                </a>
+
+                                <span class="koru-breadcrumb-separator">/</span>
+
+                                @if (request()->routeIs('reminders.*'))
+
+                                    @if (request()->routeIs('reminders.index'))
+
+                                        <span aria-current="page">
+                                            Lịch nhắc uống thuốc
+                                        </span>
+
+                                    @else
+
+                                        <a href="{{ route(
+                                            'reminders.index',
+                                            request()->route('patient')
+                                        ) }}">
+                                            Lịch nhắc uống thuốc
+                                        </a>
+
+                                        <span class="koru-breadcrumb-separator">/</span>
+
+                                        <span aria-current="page">
+                                            {{ $pageLabels[$routeName] ?? 'Chi tiết' }}
+                                        </span>
+
+                                    @endif
+
+                                @else
+
+                                    <span aria-current="page">
+                                        {{ $pageLabels[$routeName] ?? 'Hồ sơ' }}
+                                    </span>
+
+                                @endif
+
+                            @endif
+
+                        </nav>
+
+                    @else
+
+                        {{ $header }}
+
+                    @endif
+
                 </div>
             </header>
-        @endisset
+        @endif
+
 
         <!-- Page Content -->
         <main>

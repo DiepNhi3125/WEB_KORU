@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* KORU - Breadcrumb dùng chung */
+
+.koru-breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #0c235a;
+}
+
+.koru-breadcrumb a {
+    color: #3474f5;
+    text-decoration: none;
+}
+
+.koru-breadcrumb a:hover {
+    color: #1f5fdd;
+    text-decoration: underline;
+}
+
+.koru-breadcrumb-separator {
+    color: #94a3b8;
+}
+
+.koru-breadcrumb [aria-current="page"] {
+    color: #0c235a;
+    font-weight: 600;
+}
