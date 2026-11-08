@@ -35,12 +35,19 @@
                     · {{ $reminders->count() }} lịch nhắc
                 </p>
             </div>
+            <div class="rm-list-actions">
 
-            @if ($isOwner)
-                <a href="{{ route('reminders.create', $patient) }}" class="rm-list-create">
-                    + Tạo lịch nhắc
+                <a href="{{ route('patients.statistics', $patient) }}" class="rm-list-create">
+                    Thống kê uống thuốc
                 </a>
-            @endif
+
+                @if ($isOwner)
+                    <a href="{{ route('reminders.create', $patient) }}" class="rm-list-create">
+                        + Tạo lịch nhắc
+                    </a>
+                @endif
+
+            </div>
 
         </div>
 
@@ -113,7 +120,9 @@
                         'patient' => $patient,
                         'reminder' => $reminder
                     ]) }}" class="rm-list-row" data-reminder data-status="{{ $reminder->status }}"
-                                    data-name="{{ $reminder->name }}" x-show="(filter === 'all' ||filter === $el.dataset.status)&&$el.dataset.name.toLowerCase().includes(search.trim().toLowerCase())" x-cloakaria-label="Xem chi tiết lịch nhắc {{ $reminder->name }}">
+                                    data-name="{{ $reminder->name }}"
+                                    x-show="(filter === 'all' ||filter === $el.dataset.status)&&$el.dataset.name.toLowerCase().includes(search.trim().toLowerCase())"
+                                    x-cloakaria-label="Xem chi tiết lịch nhắc {{ $reminder->name }}">
 
 
                                     <!-- TÊN LỊCH -->
@@ -217,17 +226,17 @@
                 @if ($reminders->isNotEmpty())
 
                     <div class="rm-list-empty" x-show="
-                                        !Array.from(
-                                            $el.parentElement
-                                                .querySelectorAll('[data-reminder]')
-                                        ).some(row =>
-                                            (filter === 'all' ||
-                                             row.dataset.status === filter)
-                                            &&
-                                            row.dataset.name.toLowerCase()
-                                                .includes(search.trim().toLowerCase())
-                                        )
-                                    " x-cloak>
+                                                    !Array.from(
+                                                        $el.parentElement
+                                                            .querySelectorAll('[data-reminder]')
+                                                    ).some(row =>
+                                                        (filter === 'all' ||
+                                                         row.dataset.status === filter)
+                                                        &&
+                                                        row.dataset.name.toLowerCase()
+                                                            .includes(search.trim().toLowerCase())
+                                                    )
+                                                " x-cloak>
 
                         Không tìm thấy lịch nhắc phù hợp.
                         Hãy thử thay đổi từ khóa hoặc bộ lọc.

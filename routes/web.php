@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\PatientStatisticsController;
 use App\Http\Controllers\PatientPairingController;
 use App\Http\Controllers\PatientSharingController;
 use App\Http\Controllers\ReminderController;
@@ -59,6 +60,10 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
             ->middleware('patient.access')
             ->name('reminders.show');
 
+        Route::get('/patients/{patient}/statistics',[PatientStatisticsController::class, 'index'])
+            ->middleware('patient.access')
+            ->name('patients.statistics');
+
 
         // Chỉ người chăm sóc chính được chỉnh sửa
         Route::middleware('patient.owner')->group(function () {
@@ -86,15 +91,15 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
             Route::post('/patients/{patient}/reminders', [ReminderController::class, 'store'])
                 ->name('reminders.store');
 
-            Route::get('/patients/{patient}/reminders/{reminder}/edit',[ReminderController::class, 'edit'])
+            Route::get('/patients/{patient}/reminders/{reminder}/edit', [ReminderController::class, 'edit'])
                 ->whereNumber('reminder')
                 ->name('reminders.edit');
 
             // Lưu thông tin lịch nhắc đã chỉnh sửa
-            Route::patch('/patients/{patient}/reminders/{reminder}',[ReminderController::class, 'update'])
+            Route::patch('/patients/{patient}/reminders/{reminder}', [ReminderController::class, 'update'])
                 ->whereNumber('reminder')
                 ->name('reminders.update');
-            Route::patch('/patients/{patient}/reminders/{reminder}/stop',[ReminderController::class, 'stop'])
+            Route::patch('/patients/{patient}/reminders/{reminder}/stop', [ReminderController::class, 'stop'])
                 ->whereNumber('reminder')
                 ->name('reminders.stop');
         });

@@ -64,6 +64,7 @@
                 'reminders.create' => 'Tạo lịch nhắc',
                 'reminders.show' => 'Chi tiết',
                 'reminders.edit' => 'Chỉnh sửa',
+                'patients.statistics' => 'Thống kê uống thuốc',
             ];
         @endphp
 
