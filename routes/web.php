@@ -94,6 +94,9 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
             Route::patch('/patients/{patient}/reminders/{reminder}',[ReminderController::class, 'update'])
                 ->whereNumber('reminder')
                 ->name('reminders.update');
+            Route::patch('/patients/{patient}/reminders/{reminder}/stop',[ReminderController::class, 'stop'])
+                ->whereNumber('reminder')
+                ->name('reminders.stop');
         });
     });
 

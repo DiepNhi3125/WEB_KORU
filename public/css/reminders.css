@@ -945,3 +945,27 @@
         flex-wrap: wrap;
     }
 }
+
+
+/* Nút dừng lịch nhắc */
+
+.rm-detail-stop {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 14px;
+    border: 1px solid #fecaca;
+    border-radius: 9px;
+    background: #fff;
+    color: #dc2626;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.rm-detail-stop:hover {
+    background: #fef2f2;
+    border-color: #fca5a5;
+}

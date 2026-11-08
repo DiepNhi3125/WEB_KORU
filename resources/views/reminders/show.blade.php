@@ -49,16 +49,13 @@
 
 
             <!-- Các thao tác với lịch nhắc -->
+
             <div class="rm-detail-actions">
 
-                @if (
-                                    (int) $patient->owner_id === (int) auth()->id()
-                                    && $reminder->status === 'active'
-                                )
-                                <a href="{{ route('reminders.edit', [
-                        'patient' => $patient,
-                        'reminder' => $reminder->id
-                    ]) }}" class="rm-detail-edit">
+                @if ((int) $patient->owner_id === (int) auth()->id()&& $reminder->status === 'active')
+
+                                <!-- Chỉnh sửa lịch nhắc -->
+                                <a href="{{ route('reminders.edit', ['patient' => $patient,'reminder' => $reminder->id]) }}" class="rm-detail-edit">
 
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                         <path d="M12 20h9" />
@@ -67,11 +64,25 @@
 
                                     Chỉnh sửa
                                 </a>
+
+                                <!-- Dừng lịch nhắc -->
+                                <form method="POST" action="{{ route('reminders.stop', ['patient' => $patient,'reminder' => $reminder->id]) }}"
+                                    onsubmit="return confirm('Bạn có chắc muốn dừng lịch nhắc này? Lịch sử uống thuốc vẫn được giữ lại.');">
+
+                                    @csrf
+                                    @method('PATCH')
+
+                                    <button type="submit" class="rm-detail-stop">
+                                        Dừng lịch
+                                    </button>
+
+                                </form>
+
                 @endif
 
                 <!-- Trạng thái lịch nhắc -->
                 <span class="rm-status
-        {{ $reminder->status === 'active'? 'rm-status--active': ($reminder->status === 'stopped'? 'rm-status--stopped': '') }}">
+        {{ $reminder->status === 'active'? 'rm-status--active': 'rm-status--stopped' }}">
 
                     @if ($reminder->status === 'active')
                         Đang hoạt động
@@ -84,6 +95,7 @@
                 </span>
 
             </div>
+
 
 
         </div>

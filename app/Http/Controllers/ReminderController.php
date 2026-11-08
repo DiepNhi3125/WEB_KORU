@@ -293,4 +293,29 @@ class ReminderController extends Controller
             ->with('success', 'Đã cập nhật lịch nhắc thành công.');
     }
 
+
+    // Dừng lịch nhắc uống thuốc
+    public function stop(Patient $patient, $reminder)
+    {
+        // Chỉ tìm lịch nhắc thuộc đúng hồ sơ người bệnh
+        $reminder = $patient->reminders()
+            ->findOrFail($reminder);
+
+        // Không xử lý lại lịch đã dừng hoặc không còn hoạt động
+        if ($reminder->status !== 'active') {
+            return redirect()
+                ->route('reminders.show', [$patient, $reminder->id])
+                ->with('warning', 'Lịch nhắc này không còn hoạt động.');
+        }
+
+        // Chỉ cập nhật trạng thái, không xóa dữ liệu
+        $reminder->status = 'stopped';
+        $reminder->stopped_at = now();
+        $reminder->save();
+
+        return redirect()
+            ->route('reminders.show', [$patient, $reminder->id])
+            ->with('success', 'Đã dừng lịch nhắc uống thuốc thành công.');
+    }
+
 }
