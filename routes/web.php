@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PatientStatisticsController;
 use App\Http\Controllers\PatientPairingController;
 use App\Http\Controllers\PatientSharingController;

@@ -7,6 +7,7 @@
     padding: 55px 24px 75px;
     background: radial-gradient(ellipse at 50% 5%, #e4efff 0%, #f6f9ff 55%, #f5f8fc 100%);
     color: #132c56;
+    font-family: inherit;
 }
 
 .kd-page * {
