@@ -109,3 +109,239 @@
         display: none;
     }
 }
+
+/* KORU - Chuông thông báo */
+
+[x-cloak] {
+    display: none !important;
+}
+
+.koru-nav-account {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.kn-wrap {
+    position: relative;
+}
+
+.kn-button {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #e4ebf7;
+    border-radius: 50%;
+    background: #f7faff;
+    color: #234b80;
+    cursor: pointer;
+    transition: background .2s, border-color .2s;
+}
+
+.kn-button:hover,
+.kn-button[aria-expanded="true"] {
+    background: #eaf2ff;
+    border-color: #c9dcff;
+}
+
+.kn-button svg {
+    width: 21px;
+    height: 21px;
+}
+
+.kn-badge {
+    position: absolute;
+    top: -5px;
+    right: -6px;
+    min-width: 19px;
+    height: 19px;
+    padding: 0 5px;
+    display: grid;
+    place-items: center;
+    border: 2px solid white;
+    border-radius: 15px;
+    background: #ef4444;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.kn-panel {
+    position: absolute;
+    top: calc(100% + 13px);
+    right: 0;
+    z-index: 60;
+    width: 390px;
+    max-width: calc(100vw - 28px);
+    overflow: hidden;
+    border: 1px solid #e7edf6;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 0 16px 48px rgba(19, 49, 91, .15);
+}
+
+.kn-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 19px 20px 15px;
+    border-bottom: 1px solid #edf1f7;
+}
+
+.kn-header h3 {
+    margin: 0;
+    color: #102f5c;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.kn-header p {
+    margin: 4px 0 0;
+    color: #8190a8;
+    font-size: 12px;
+}
+
+.kn-mark-all {
+    border: 0;
+    background: transparent;
+    color: #3474f5;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.kn-mark-all:hover {
+    text-decoration: underline;
+}
+
+.kn-list {
+    max-height: 390px;
+    overflow-y: auto;
+}
+
+.kn-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+    padding: 16px 18px;
+    border: 0;
+    border-bottom: 1px solid #f0f3f8;
+    background: white;
+    text-align: left;
+    cursor: pointer;
+}
+
+.kn-item:hover {
+    background: #f7faff;
+}
+
+.kn-item.is-unread {
+    background: #f0f6ff;
+}
+
+.kn-item-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.kn-item-icon--missed {
+    background: #fff0f0;
+    color: #dc2626;
+}
+
+.kn-item-icon--done {
+    background: #eaf9f0;
+    color: #169b62;
+}
+
+.kn-item-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.kn-item-title {
+    color: #18345f;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.kn-item-message {
+    margin-top: 4px;
+    color: #53657e;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.kn-item-time {
+    margin-top: 7px;
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+.kn-unread-dot {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    margin-top: 7px;
+    border-radius: 50%;
+    background: #3474f5;
+}
+
+.kn-empty,
+.kn-error {
+    padding: 32px 18px;
+    color: #7c8da5;
+    font-size: 13px;
+    text-align: center;
+}
+
+.kn-error {
+    padding: 12px;
+    color: #b45309;
+    background: #fffbeb;
+}
+
+.kn-error button {
+    margin-left: 5px;
+    color: #3474f5;
+    text-decoration: underline;
+}
+
+.kn-footer {
+    padding: 13px 18px;
+    border-top: 1px solid #edf1f7;
+    text-align: center;
+}
+
+.kn-footer a {
+    color: #3474f5;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.kn-footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .kn-panel {
+        right: -64px;
+    }
+
+    .koru-nav-account {
+        gap: 8px;
+    }
+}

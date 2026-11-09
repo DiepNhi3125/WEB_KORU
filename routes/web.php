@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PatientStatisticsController;
 use App\Http\Controllers\PatientPairingController;
@@ -36,6 +37,26 @@ Route::middleware(['auth', 'account.unlocked', 'verified', 'role:caregiver'])
 
             return view('dashboard', compact('patients'));
         })->name('dashboard');
+
+        
+        // Thông báo của người chăm sóc
+        Route::get('/notifications', [
+            NotificationController::class, 'index'
+        ])->name('notifications.index');
+
+        Route::get('/notifications/feed', [
+            NotificationController::class, 'feed'
+        ])->name('notifications.feed');
+
+        Route::post('/notifications/read-all', [
+            NotificationController::class, 'readAll'
+        ])->name('notifications.read-all');
+
+        Route::post('/notifications/{notification}/read', [
+            NotificationController::class, 'read'
+        ])->whereUuid('notification')
+          ->name('notifications.read');
+
 
         Route::get('/profile', [ProfileController::class, 'edit'])
             ->name('profile.edit');
