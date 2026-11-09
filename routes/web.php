@@ -120,17 +120,21 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
         });
     });
 
+
+// Admin: tài khoản được cấp sẵn
 // Admin: tài khoản được cấp sẵn
 Route::middleware(['auth', 'role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
 
-        Route::get('/dashboard', function () {
-            return 'Trang quản trị KORU';
-        })->name('dashboard');
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])
+            ->name('dashboard');
 
+        Route::get('/users', [AdminController::class, 'users'])
+            ->name('users.index');
     });
+
 
 
 
