@@ -16,7 +16,7 @@ Route::get('/device/pair', [PatientPairingController::class, 'scan'])
     ->name('device.pair');
 
 // Người chăm sóc: bắt buộc xác thực email
-Route::middleware(['auth', 'verified', 'role:caregiver'])
+Route::middleware(['auth', 'account.unlocked', 'verified', 'role:caregiver'])
     ->group(function () {
 
         Route::get('/dashboard', function () {
@@ -123,7 +123,7 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
 
 // Admin: tài khoản được cấp sẵn
 // Admin: tài khoản được cấp sẵn
-Route::middleware(['auth', 'role:admin'])
+Route::middleware(['auth', 'account.unlocked', 'role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
@@ -133,6 +133,21 @@ Route::middleware(['auth', 'role:admin'])
 
         Route::get('/users', [AdminController::class, 'users'])
             ->name('users.index');
+
+        // Chi tiết tài khoản
+        Route::get('/users/{user}', [AdminController::class, 'showUser'])
+            ->whereNumber('user')
+            ->name('users.show');
+
+        // Khóa tài khoản
+        Route::patch('/users/{user}/lock', [AdminController::class, 'lockUser'])
+            ->whereNumber('user')
+            ->name('users.lock');
+
+        // Mở khóa tài khoản
+        Route::patch('/users/{user}/unlock', [AdminController::class, 'unlockUser'])
+            ->whereNumber('user')
+            ->name('users.unlock');
     });
 
 

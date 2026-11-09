@@ -1,4 +1,3 @@
-
 @extends('layouts.admin')
 
 @section('title', 'Quản lý tài khoản')
@@ -15,17 +14,10 @@
 
     <section class="ka-panel">
         <!-- Tìm kiếm và lọc -->
-        <form method="GET"
-              action="{{ route('admin.users.index') }}"
-              class="ka-filters"
-              role="search">
+        <form method="GET" action="{{ route('admin.users.index') }}" class="ka-filters" role="search">
 
-            <input type="search"
-                   name="q"
-                   value="{{ $search }}"
-                   maxlength="100"
-                   aria-label="Tìm kiếm tài khoản"
-                   placeholder="Tìm theo họ tên hoặc email...">
+            <input type="search" name="q" value="{{ $search }}" maxlength="100" aria-label="Tìm kiếm tài khoản"
+                placeholder="Tìm theo họ tên hoặc email...">
 
             <select name="status" aria-label="Lọc trạng thái">
                 <option value="">Tất cả trạng thái</option>
@@ -59,29 +51,35 @@
                         <th>Số điện thoại</th>
                         <th>Trạng thái</th>
                         <th>Ngày đăng ký</th>
+                        <th>Thao tác</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @forelse ($users as $user)
-                        <tr>
-                            <td class="ka-user-name">{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->phone ?? '—' }}</td>
-                            <td>
-                                <span class="ka-status ka-status-{{ $user->account_status }}">
-                                    {{ [
-                                        'active' => 'Hoạt động',
-                                        'pending' => 'Chờ kích hoạt',
-                                        'locked' => 'Bị khóa'
-                                    ][$user->account_status] ?? 'Không xác định' }}
-                                </span>
-                            </td>
-                            <td>{{ $user->created_at?->format('d/m/Y') }}</td>
-                        </tr>
+                                    <tr>
+                                        <td class="ka-user-name">{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->phone ?? '—' }}</td>
+                                        <td>
+                                            <span class="ka-status ka-status-{{ $user->account_status }}">
+                                                {{ [
+                            'active' => 'Hoạt động',
+                            'pending' => 'Chờ kích hoạt',
+                            'locked' => 'Bị khóa'
+                        ][$user->account_status] ?? 'Không xác định' }}
+                                            </span>
+                                        </td>
+                                        <td>{{ $user->created_at?->format('d/m/Y') }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.users.show', $user) }}" class="ka-detail-link">
+                                                Xem chi tiết
+                                            </a>
+                                        </td>
+                                    </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="ka-empty">
+                            <td colspan="6" class="ka-empty">
                                 Không tìm thấy tài khoản phù hợp.
                             </td>
                         </tr>

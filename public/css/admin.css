@@ -584,3 +584,186 @@
         transition: none;
     }
 }
+
+/* KORU Admin - Chi tiết tài khoản */
+
+.ka-detail-link {
+    color: #3474f5;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.ka-detail-link:hover {
+    text-decoration: underline;
+}
+
+.ka-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 28px;
+    border-bottom: 1px solid #edf2f9;
+}
+
+.ka-detail-user {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+
+.ka-detail-avatar {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 19px;
+    background: #eaf2ff;
+    color: #3474f5;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.ka-detail-user h2 {
+    margin: 0;
+    color: #15345e;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.ka-detail-user p {
+    margin: 6px 0 0;
+    color: #91a3ba;
+    font-size: 12px;
+}
+
+.ka-detail-body {
+    padding: 30px 28px;
+}
+
+.ka-detail-body h3 {
+    margin: 0 0 24px;
+    color: #15345e;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.ka-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px 35px;
+}
+
+.ka-detail-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-width: 0;
+}
+
+.ka-detail-field span {
+    color: #8194ae;
+    font-size: 12px;
+}
+
+.ka-detail-field strong {
+    overflow-wrap: anywhere;
+    color: #193a69;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.ka-detail-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 23px 28px;
+    border-top: 1px solid #edf2f9;
+    background: #fbfcff;
+}
+
+.ka-detail-actions p {
+    max-width: 440px;
+    margin: 0;
+    color: #8194ae;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.ka-btn-lock,
+.ka-btn-unlock {
+    min-height: 42px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 11px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.ka-btn-lock {
+    background: #fff0f1;
+    color: #d14d60;
+}
+
+.ka-btn-lock:hover {
+    background: #ffe0e4;
+}
+
+.ka-btn-unlock {
+    background: #e4f8f0;
+    color: #09956e;
+}
+
+.ka-btn-unlock:hover {
+    background: #ccf2e3;
+}
+
+/* Thông báo Admin */
+.ka-alert {
+    margin-bottom: 20px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.ka-alert-success {
+    background: #e5f8f0;
+    color: #087f60;
+}
+
+.ka-alert-warning {
+    background: #fff5df;
+    color: #a47720;
+}
+
+.ka-alert-error {
+    background: #fff0f1;
+    color: #c63d51;
+}
+
+@media (max-width: 650px) {
+    .ka-detail-header,
+    .ka-detail-actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .ka-detail-grid {
+        grid-template-columns: 1fr;
+        gap: 23px;
+    }
+
+    .ka-detail-header,
+    .ka-detail-body,
+    .ka-detail-actions {
+        padding: 22px;
+    }
+}

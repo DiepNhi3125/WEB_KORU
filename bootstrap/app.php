@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Middleware\EnsureAccountNotLocked;
 use App\Http\Middleware\CheckRole;
 use App\Http\Middleware\EnsurePatientOwner;
 use App\Http\Middleware\EnsurePatientAccess;
@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         'role' => CheckRole::class,
         'patient.owner' => EnsurePatientOwner::class,
         'patient.access' => EnsurePatientAccess::class,
+        'account.unlocked' => EnsureAccountNotLocked::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
