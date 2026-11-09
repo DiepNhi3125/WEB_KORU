@@ -16,7 +16,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link rel="stylesheet" href="{{ asset('css/toast.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navigation.css') }}">
     <script src="{{ asset('js/toast.js') }}" defer></script>
+
+    
 </head>
 
 <body class="font-sans antialiased">
@@ -48,7 +51,6 @@
             $isManagementPage = request()->routeIs(
                 'patients.*',
                 'reminders.*',
-                'dashboard',
                 'profile.*'
             );
 

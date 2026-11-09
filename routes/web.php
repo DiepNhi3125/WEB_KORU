@@ -19,7 +19,21 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
     ->group(function () {
 
         Route::get('/dashboard', function () {
-            return view('dashboard');
+            $user = auth()->user();
+
+            $patients = $user->ownedPatients()
+                ->select('patients.id', 'patients.full_name')
+                ->get()
+                ->concat(
+                    $user->sharedPatients()
+                        ->select('patients.id', 'patients.full_name')
+                        ->get()
+                )
+                ->unique('id')
+                ->sortBy('full_name')
+                ->values();
+
+            return view('dashboard', compact('patients'));
         })->name('dashboard');
 
         Route::get('/profile', [ProfileController::class, 'edit'])
@@ -60,7 +74,7 @@ Route::middleware(['auth', 'verified', 'role:caregiver'])
             ->middleware('patient.access')
             ->name('reminders.show');
 
-        Route::get('/patients/{patient}/statistics',[PatientStatisticsController::class, 'index'])
+        Route::get('/patients/{patient}/statistics', [PatientStatisticsController::class, 'index'])
             ->middleware('patient.access')
             ->name('patients.statistics');
 
